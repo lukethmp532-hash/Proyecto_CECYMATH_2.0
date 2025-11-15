@@ -1,0 +1,33 @@
+<!-- core/templates/core/index.html -->
+
+{% load static %}
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bienvenido a CECYMATH 2.0</title>
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+</head>
+<body>
+    <header>
+        <h1>Proyecto CECYMATH 2.0</h1>
+        <p>Reforzando tus conocimientos en matemáticas</p>
+    </header>
+
+    <main>
+        <section id="menu-principal">
+            <h2>Selecciona un tema para practicar</h2>
+            <ul class="menu-grid">
+                
+                <li><a href="{% url 'division' %}">División</a></li>
+                <li><a href="{% url 'jerarquia' %}">Jerarquía de Operaciones</a></li>
+                <li><a href="{% url 'recta_numerica' %}">Recta Numérica</a></li>
+                <!-- Agrega aquí los enlaces para los futuros addons -->
+                <!-- <li><a href="#">Resta (Próximamente)</a></li> -->
+                <!-- <li><a href="#">Multiplicación (Próximamente)</a></li> -->
+            </ul>
+        </section>
+    </main>
+</body>
+</html>

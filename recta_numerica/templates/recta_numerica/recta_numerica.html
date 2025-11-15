@@ -1,0 +1,59 @@
+<!-- recta_numerica/templates/recta_numerica/recta_numerica.html -->
+
+{% load static %}
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Recta Numérica - CECYMATH 2.0</title>
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+</head>
+<body>
+    <header>
+        <h1>CECYMATH 2.0 - Recta Numérica</h1>
+        <nav>
+            <a href="{% url 'index' %}">← Volver al Menú Principal</a>
+        </nav>
+    </header>
+
+    <main>
+        <section id="explicacion">
+            <h2>Generador de Recta Numérica</h2>
+            <p>Introduce números (positivos, negativos o decimales) separados por comas para verlos representados en la recta.</p>
+        </section>
+
+        <section id="generador">
+            <h3>Introduce los números</h3>
+            <form action="{% url 'recta_numerica' %}" method="post">
+                {% csrf_token %}
+                <label for="numeros">Números separados por comas:</label>
+                <input type="text" id="numeros" name="numeros" value="{{ numeros_originales }}" required placeholder="Ej: -10, 0, 5.5, 15">
+                <button type="submit">Dibujar en la Recta</button>
+            </form>
+
+            <!-- Solo muestra la sección de la recta si 'puntos' existe -->
+            {% if puntos %}
+                <div id="resultado_grafico" style="margin-top:50px;">
+                    <h3>Tu Recta Numérica:</h3>
+                    <div class="recta-container">
+                        <div class="recta-linea"></div>
+                        <!-- Iteramos sobre cada punto que la vista nos envió -->
+                        {% for punto in puntos %}
+                            <!-- Colocamos cada punto usando su posición porcentual calculada -->
+                            <div class="recta-punto" style="left: {{ punto.posicion }}%;">
+                                <span class="punto-etiqueta">{{ punto.valor }}</span>
+                            </div>
+                        {% endfor %}
+                    </div>
+                </div>
+            {% endif %}
+
+            {% if error %}
+                <div id="error">
+                    <p>{{ error }}</p>
+                </div>
+            {% endif %}
+        </section>
+    </main>
+</body>
+</html>

@@ -1,0 +1,55 @@
+<!-- jerarquia/templates/jerarquia/jerarquia.html -->
+
+{% load static %}
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Jerarquía de Operaciones - CECYMATH 2.0</title>
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+</head>
+<body>
+    <header>
+        <h1>CECYMATH 2.0 - Jerarquía de Operaciones</h1>
+        <nav>
+            <a href="{% url 'index' %}">← Volver al Menú Principal</a>
+        </nav>
+    </header>
+
+    <main>
+        <section id="explicacion">
+            <h2>¿Qué es la Jerarquía de Operaciones?</h2>
+            <p>Es el orden estricto en el que se deben realizar las operaciones matemáticas para garantizar que el resultado sea siempre el mismo. La regla se conoce comúnmente como <strong>PEMDAS</strong>.</p>
+            <ol>
+                <li><strong>P</strong>aréntesis: ( ), [ ], { }</li>
+                <li><strong>E</strong>xponentes: x², √</li>
+                <li><strong>M</strong>ultiplicación y <strong>D</strong>ivisión: (de izquierda a derecha)</li>
+                <li><strong>A</strong>dición (Suma) y <strong>S</strong>ustracción (Resta): (de izquierda a derecha)</li>
+            </ol>
+             <p><strong>Ejemplo:</strong> En la expresión <code>5 + 2 * 3</code>, primero se hace <code>2 * 3 = 6</code>, y luego <code>5 + 6 = 11</code>.</p>
+        </section>
+
+        <section id="calculadora">
+            <h3>Calculadora de Jerarquía</h3>
+            <form action="{% url 'jerarquia' %}" method="post">
+                {% csrf_token %}
+                <label for="expresion">Introduce la expresión matemática:</label>
+                <input type="text" id="expresion" name="expresion" value="{{ expresion_original }}" required placeholder="Ej: (5 + 3) * 2">
+                <button type="submit">Calcular</button>
+            </form>
+
+            {% if resultado is not None %}
+                <div id="resultado">
+                    <p>El resultado es: {{ resultado }}</p>
+                </div>
+            {% endif %}
+
+            {% if error %}
+                <div id="error">
+                    <p>{{ error }}</p>
+                </div>
+            {% endif %}
+        </section>
+    </main>
+</body>
+</html>
