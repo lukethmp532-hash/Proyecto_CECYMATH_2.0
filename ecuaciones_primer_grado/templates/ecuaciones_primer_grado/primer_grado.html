@@ -1,0 +1,54 @@
+<!-- ecuaciones_primer_grado/templates/ecuaciones_primer_grado/primer_grado.html -->
+
+{% load static %}
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Ecuaciones de Primer Grado - CECYMATH 2.0</title>
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+</head>
+<body>
+    <header>
+        <h1>CECYMATH 2.0 - Ecuaciones de Primer Grado</h1>
+        <nav>
+            <a href="{% url 'index' %}">← Volver al Menú Principal</a>
+        </nav>
+    </header>
+
+    <main>
+        <section id="explicacion">
+            <h2>Ecuaciones de Primer Grado</h2>
+            <p>Una ecuación de primer grado es una igualdad que contiene una incógnita x, la cual no sabemos su valor. En la ecuación, la mayor potencia de la incógnita es 1.</p>
+            <h2>Resolver Ecuaciones de la Forma ax + b = c</h2>
+            <p>Una ecuación de primer grado es una igualdad que tiene una incógnita (x) con exponente 1. El objetivo es "despejar" la x para encontrar su valor.</p>
+        </section>
+
+        <section id="calculadora">
+            <h3>Calculadora de Ecuaciones</h3>
+            <form action="{% url 'primer_grado' %}" method="post">
+                {% csrf_token %}
+                <label for="a">Coeficiente 'a' (el número que multiplica a x):</label>
+                <input type="number" id="a" name="a" value="{{ v.a }}" step="any" required>
+                <label for="b">Término 'b':</label>
+                <input type="number" id="b" name="b" value="{{ v.b }}" step="any" required>
+                <label for="c">Término 'c' (el resultado):</label>
+                <input type="number" id="c" name="c" value="{{ v.c }}" step="any" required>
+                <button type="submit">Resolver para x</button>
+            </form>
+
+            {% if resultado is not None %}
+                <div id="resultado">
+                    <p><strong>{{ resultado }}</strong></p>
+                </div>
+            {% endif %}
+
+            {% if error %}
+                <div id="error">
+                    <p>{{ error }}</p>
+                </div>
+            {% endif %}
+        </section>
+    </main>
+</body>
+</html>

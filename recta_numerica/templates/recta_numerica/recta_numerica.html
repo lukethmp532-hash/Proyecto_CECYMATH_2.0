@@ -7,6 +7,7 @@
     <meta charset="UTF-8">
     <title>Recta Numérica - CECYMATH 2.0</title>
     <link rel="stylesheet" href="{% static 'css/style.css' %}">
+    
 </head>
 <body>
     <header>
@@ -17,13 +18,17 @@
     </header>
 
     <main>
-        <section id="explicacion">
-            <h2>Generador de Recta Numérica</h2>
-            <p>Introduce números (positivos, negativos o decimales) separados por comas para verlos representados en la recta.</p>
+        <section class="explicacion">
+        <h2>Recta Numérica</h2>
+        <p>Una recta numérica es una línea recta que representa los números de manera ordenada y equidistante. El cero generalmente se ubica en el centro, los números positivos se extienden hacia la derecha y los negativos hacia la izquierda. Se usa para visualizar, comparar y operar números, como sumas y restas, ya que permite ver su posición y magnitud relativa.  </p>
         </section>
 
-        <section id="generador">
-            <h3>Introduce los números</h3>
+        <section id="Generador">
+            <h2>Generador de Recta Numérica</h2>
+            <p>Introduce números (positivos, negativos o decimales) separados por comas para verlos representados en la recta.</p>
+        
+        
+            <h3 style="border-top: 1px solid rgb(168, 166, 166);">Introduce los números</h3>
             <form action="{% url 'recta_numerica' %}" method="post">
                 {% csrf_token %}
                 <label for="numeros">Números separados por comas:</label>

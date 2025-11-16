@@ -1,0 +1,108 @@
+<!-- areas_perimetros/templates/areas_perimetros/areas_perimetros.html -->
+
+{% load static %}
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Áreas y Perímetros - CECYMATH 2.0</title>
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+</head>
+<body>
+    <header>
+        <h1>CECYMATH 2.0 - Áreas y Perímetros</h1>
+        <nav>
+            <a href="{% url 'index' %}">← Volver al Menú Principal</a>
+        </nav>
+    </header>
+    <main>
+        <section class="explicacion">
+            <h2>Fórmulas de Áreas y Perímetros</h2>
+            <p>Aquí encontrarás las fórmulas básicas para calcular el área y el perímetro de las figuras geométricas más comunes.</p>
+        </section>
+        {% if resultado %}
+            <div id="resultado" style="margin-bottom: 30px;">
+                <p><strong>{{ resultado }}</strong></p>
+            </div>
+        {% endif %}
+        {% if error %}
+            <div id="error" style="margin-bottom: 30px;">
+                <p>{{ error }}</p>
+            </div>
+        {% endif %}
+
+        <!-- Calculadora para el Cuadrado -->
+        <section>
+            <h3>Cuadrado</h3>
+            <p>Un cuadrado es una figura con cuatro lados iguales y cuatro ángulos rectos (90°).</p>
+            <ul>
+                <li><strong>Área:</strong> Se calcula multiplicando la longitud de un lado por sí misma. Fórmula: <strong>Lado × Lado</strong> o <strong>Lado²</strong></li>
+                <li><strong>Perímetro:</strong> Es la suma de las longitudes de sus cuatro lados. Fórmula: <strong>4 × Lado</strong></li>
+            </ul>
+            <form method="post">
+                {% csrf_token %}
+                <input type="hidden" name="figura" value="cuadrado">
+                <label for="lado">Lado:</label>
+                <input type="number" name="lado" step="any" required>
+                <button type="submit">Calcular</button>
+            </form>
+        </section>
+
+        <!-- Calculadora para el Rectángulo -->
+        <section>
+            <h3>Rectángulo</h3>
+            <p>Un rectángulo es una figura con cuatro lados, donde los lados opuestos son iguales, y tiene cuatro ángulos rectos.</p>
+            <ul>
+                <li><strong>Área:</strong> Se calcula multiplicando la longitud de su base por su altura. Fórmula: <strong>Base × Altura</strong></li>
+                <li><strong>Perímetro:</strong> Es la suma de las longitudes de sus cuatro lados. Fórmula: <strong>2 × (Base + Altura)</strong></li>
+            </ul>
+            <form method="post">
+                {% csrf_token %}
+                <input type="hidden" name="figura" value="rectangulo">
+                <label for="base">Base:</label>
+                <input type="number" name="base" step="any" required>
+                <label for="altura">Altura:</label>
+                <input type="number" name="altura" step="any" required>
+                <button type="submit">Calcular</button>
+            </form>
+        </section>
+
+        <!-- Calculadora para el Círculo -->
+        <section>
+            <h3>Círculo</h3>
+            <p>Un círculo es una figura delimitada por una circunferencia. La distancia desde el centro a cualquier punto de la circunferencia se llama radio.</p>
+            <ul>
+                <li><strong>Área:</strong> Se calcula multiplicando Pi (π ≈ 3.14159) por el radio al cuadrado. Fórmula: <strong>π × Radio²</strong></li>
+                <li><strong>Perímetro (Circunferencia):</strong> Es la longitud de la línea curva que forma el círculo. Fórmula: <strong>2 × π × Radio</strong></li>
+            </ul>
+            <form method="post">
+                {% csrf_token %}
+                <input type="hidden" name="figura" value="circulo">
+                <label for="radio">Radio:</label>
+                <input type="number" name="radio" step="any" required>
+                <button type="submit">Calcular</button>
+            </form>
+        </section>
+
+        <!-- Calculadora para el Triángulo -->
+        <section>
+            <h3>Triángulo Rectángulo</h3>
+            <p>Un triángulo rectángulo es aquel que tiene un ángulo recto (90°). Los lados que forman el ángulo recto se llaman catetos, y el lado opuesto es la hipotenusa.</p>
+            <ul>
+                <li><strong>Área:</strong> Se calcula multiplicando la base por la altura y dividiendo entre dos. Fórmula: <strong>(Base × Altura) / 2</strong></li>
+                <li><strong>Perímetro:</strong> Es la suma de las longitudes de sus tres lados. Para este ejemplo, calculamos la hipotenusa usando el Teorema de Pitágoras (a² + b² = c²).</li>
+            </ul>
+            <p style="font-size: 0.9em; color: #555;">Para el perímetro, se asume que la base y la altura son los catetos.</p>
+            <form method="post">
+                {% csrf_token %}
+                <input type="hidden" name="figura" value="triangulo">
+                <label for="base_t">Base:</label>
+                <input type="number" name="base_t" step="any" required>
+                <label for="altura_t">Altura:</label>
+                <input type="number" name="altura_t" step="any" required>
+                <button type="submit">Calcular</button>
+            </form>
+        </section>
+    </main>
+</body>
+</html>

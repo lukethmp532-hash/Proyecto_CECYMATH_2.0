@@ -1,0 +1,48 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Resta - CECYMATH 2.0</title>
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+</head>
+<body>
+    <header>
+        <h1>CECYMATH 2.0 - Resta</h1>
+        <nav>
+            <a href="{% url 'index' %}">← Volver al Menú Principal</a>
+        </nav>
+    </header>
+
+    <main>
+        <section id="explicacion">
+            <h2>Resta o Sustracción</h2>
+            <p>La resta es una operación que consiste en quitar una cierta cantidad (el sustraendo) de otra (el minuendo) para averiguar la diferencia entre las dos.</p>
+        </section>
+
+        <section id="calculadora">
+            <h3>Calculadora de Resta</h3>
+            <form action="{% url 'resta' %}" method="post">
+                {% csrf_token %}
+                <label for="num1">Minuendo (el número al que se le quita):</label>
+                <input type="number" id="num1" name="num1" value="{{ valores_originales.num1 }}" step="any" required>
+                <label for="num2">Sustraendo (el número que quita):</label>
+                <input type="number" id="num2" name="num2" value="{{ valores_originales.num2 }}" step="any" required>
+                <button type="submit">Restar</button>
+            </form>
+
+            {% if resultado is not None %}
+                <div id="resultado">
+                    <p>El resultado es: {{ resultado }}</p>
+                </div>
+            {% endif %}
+
+            {% if error %}
+                <div id="error">
+                    <p>{{ error }}</p>
+                </div>
+            {% endif %}
+        </section>
+    </main>
+</body>
+</html>

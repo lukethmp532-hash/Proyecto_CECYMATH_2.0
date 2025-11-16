@@ -1,0 +1,50 @@
+<!-- multiplicacion/templates/multiplicacion/multiplicacion.html -->
+
+{% load static %}
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Multiplicación - CECYMATH 2.0</title>
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+</head>
+<body>
+    <header>
+        <h1>CECYMATH 2.0 - Multiplicación</h1>
+        <nav>
+            <a href="{% url 'index' %}">← Volver al Menú Principal</a>
+        </nav>
+    </header>
+
+    <main>
+        <section id="explicacion">
+            <h2>Multiplicación</h2>
+            <p>La multiplicación consiste en sumar un número (el multiplicando) tantas veces como indica otro número (el multiplicador).</p>
+        </section>
+
+        <section id="calculadora">
+            <h3>Calculadora de Multiplicación</h3>
+            <form action="{% url 'multiplicacion' %}" method="post">
+                {% csrf_token %}
+                <label for="num1">Primer factor:</label>
+                <input type="number" id="num1" name="num1" value="{{ valores_originales.num1 }}" step="any" required>
+                <label for="num2">Segundo factor:</label>
+                <input type="number" id="num2" name="num2" value="{{ valores_originales.num2 }}" step="any" required>
+                <button type="submit">Multiplicar</button>
+            </form>
+
+            {% if resultado is not None %}
+                <div id="resultado">
+                    <p>El resultado es: {{ resultado }}</p>
+                </div>
+            {% endif %}
+
+            {% if error %}
+                <div id="error">
+                    <p>{{ error }}</p>
+                </div>
+            {% endif %}
+        </section>
+    </main>
+</body>
+</html>

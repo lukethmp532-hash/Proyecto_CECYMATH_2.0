@@ -1,0 +1,49 @@
+<!-- suma/templates/suma/suma.html -->
+
+{% load static %}
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Suma - CECYMATH 2.0</title>
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+</head>
+<body>
+    <header>
+        <h1>CECYMATH 2.0 - Suma o Adición</h1>
+        <nav>
+            <a href="{% url 'index' %}">← Volver al Menú Principal</a>
+        </nav>
+    </header>
+
+    <main>
+        <section id="explicacion">
+            <h2>¿Qué es la Suma?</h2>
+            <p>La suma o adición es la operación matemática que resulta al reunir en una sola varias cantidades. Los números que se suman se llaman <strong>sumandos</strong> y el resultado se llama <strong>suma</strong> o <strong>total</strong>.</p>
+        </section>
+
+        <section id="calculadora">
+            <h3>Calculadora de Suma</h3>
+            <form action="{% url 'suma' %}" method="post">
+                {% csrf_token %}
+                <label for="numero1">Primer sumando:</label>
+                <input type="number" id="numero1" name="numero1" value="{{ valores.num1 }}" step="any" required>
+                <label for="numero2">Segundo sumando:</label>
+                <input type="number" id="numero2" name="numero2" value="{{ valores.num2 }}" step="any" required>
+                <button type="submit">Calcular Suma</button>
+            </form>
+
+            {% if resultado is not None %}
+                <div id="resultado">
+                    <p>El resultado es: {{ resultado }}</p>
+                </div>
+            {% endif %}
+            {% if error %}
+                <div id="error">
+                    <p>{{ error }}</p>
+                </div>
+            {% endif %}
+        </section>
+    </main>
+</body>
+</html>

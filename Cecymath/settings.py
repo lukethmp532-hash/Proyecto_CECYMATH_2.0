@@ -41,9 +41,19 @@ INSTALLED_APPS = [
     #----App principal----#
     'core',
     #----Addons-----#
+    'suma',
+    'resta',
+    'multiplicacion',
     'division',
     'jerarquia',
     'recta_numerica',
+    'polinomios',
+    'ecuaciones_primer_grado',
+    'ecuaciones_segundo_grado',
+    'factorizacion',
+    'areas_perimetros',
+    
+
 ]
 
 MIDDLEWARE = [

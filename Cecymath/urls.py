@@ -25,6 +25,22 @@ urlpatterns = [
     # Django buscará las URLs en la app "core".
     path('', include('core.urls')),
 
+    path('suma/', include('suma.urls')),
+    
+    path('resta/', include('resta.urls')),
+
+    path('multiplicacion/', include('multiplicacion.urls')),
+
+    path('polinomios/', include('polinomios.urls')),
+
+    path('ecuaciones-primer-grado/', include('ecuaciones_primer_grado.urls')),
+
+    path('ecuaciones-segundo-grado/', include('ecuaciones_segundo_grado.urls')),
+
+    path('factorizacion/', include('factorizacion.urls')),
+
+    path('areas-perimetros/', include('areas_perimetros.urls')),
+
     # Cuando alguien visite "/division/", Django buscará las URLs en la app "division".
     path('division/', include('division.urls')),
 

@@ -1,0 +1,64 @@
+<!-- polinomios/templates/polinomios/polinomios.html -->
+
+{% load static %}
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Suma de Polinomios - CECYMATH 2.0</title>
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+</head>
+<body>
+    <header>
+        <h1>CECYMATH 2.0 - Suma de Polinomios</h1>
+        <nav>
+            <a href="{% url 'index' %}">← Volver al Menú Principal</a>
+        </nav>
+    </header>
+
+    <main>
+        <section id="explicacion">
+             <h2>Polinomios</h2>
+            <p>Un polinomio es una expresión algebraica formada por la suma de varios términos (monomios), donde cada término es el producto de una constante (coeficiente) y una o más variables elevadas a potencias enteras no negativas. Un ejemplo de polinomio es \(4x^{3}-2x^{2}+7x-1\), que está compuesto por cuatro términos. </p>
+            <h2>Suma de Polinomios de Segundo Grado</h2>
+            <p>Para sumar dos polinomios, simplemente suma los coeficientes (los números) de los términos que tienen la misma variable elevada a la misma potencia (términos semejantes).</p>
+        </section>
+
+        <section id="calculadora">
+            <h3>Calculadora de Suma de Polinomios</h3>
+            <form action="{% url 'polinomios' %}" method="post">
+                {% csrf_token %}
+                <h4>Primer Polinomio (ax² + bx + c)</h4>
+                <label for="a1">Coeficiente de x² (a):</label>
+                <input type="number" id="a1" name="a1" value="{{ p.a1|default:0 }}" step="any" required>
+                <label for="b1">Coeficiente de x (b):</label>
+                <input type="number" id="b1" name="b1" value="{{ p.b1|default:0 }}" step="any" required>
+                <label for="c1">Término constante (c):</label>
+                <input type="number" id="c1" name="c1" value="{{ p.c1|default:0 }}" step="any" required>
+
+                <h4>Segundo Polinomio (dx² + ex + f)</h4>
+                <label for="a2">Coeficiente de x² (d):</label>
+                <input type="number" id="a2" name="a2" value="{{ p.a2|default:0 }}" step="any" required>
+                <label for="b2">Coeficiente de x (e):</label>
+                <input type="number" id="b2" name="b2" value="{{ p.b2|default:0 }}" step="any" required>
+                <label for="c2">Término constante (f):</label>
+                <input type="number" id="c2" name="c2" value="{{ p.c2|default:0 }}" step="any" required>
+
+                <button type="submit">Sumar Polinomios</button>
+            </form>
+
+            {% if resultado is not None %}
+                <div id="resultado">
+                    <p>El polinomio resultante es: <strong>{{ resultado }}</strong></p>
+                </div>
+            {% endif %}
+
+            {% if error %}
+                <div id="error">
+                    <p>{{ error }}</p>
+                </div>
+            {% endif %}
+        </section>
+    </main>
+</body>
+</html>
