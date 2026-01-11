@@ -4,5 +4,5 @@ from django.urls import path
 from .views import primer_grado_view
 
 urlpatterns = [
-    path('', primer_grado_view, name='primer_grado'),
+    path('', primer_grado_view, name='ecuaciones_primer_grado'),
 ]

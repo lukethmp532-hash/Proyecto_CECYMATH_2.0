@@ -1,7 +1,3 @@
-/* ==========================================================================
-   Hoja de Estilos Maestra para el Proyecto CECYMATH 2.0
-   ========================================================================== */
-
 /* --- 1. Estilos Globales y del Cuerpo de la Página --- */
 body {
     font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
@@ -48,6 +44,7 @@ header p {
 }
 
 h2 {
+    text-align: center;
     color: #2c3e50; /* Títulos en azul oscuro */
     border-bottom: 2px solid #ecf0f1;
     padding-bottom: 10px;
@@ -206,4 +203,9 @@ button:hover {
     padding: 2px 5px;
     border-radius: 3px;
     white-space: nowrap; /* Evita que el número se parta en dos líneas */
+}
+
+img{
+    display: block;
+    margin: 0 auto 15px auto;
 }

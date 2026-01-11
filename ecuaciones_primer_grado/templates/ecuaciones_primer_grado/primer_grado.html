@@ -26,7 +26,7 @@
 
         <section id="calculadora">
             <h3>Calculadora de Ecuaciones</h3>
-            <form action="{% url 'primer_grado' %}" method="post">
+            <form action="{% url 'ecuaciones_primer_grado' %}" method="post">
                 {% csrf_token %}
                 <label for="a">Coeficiente 'a' (el número que multiplica a x):</label>
                 <input type="number" id="a" name="a" value="{{ v.a }}" step="any" required>

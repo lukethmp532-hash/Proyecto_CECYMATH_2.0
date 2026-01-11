@@ -21,8 +21,6 @@ from django.urls import path, include
 urlpatterns = [
     path('admin/', admin.site.urls),
 
-    # Cuando alguien visite la página principal (ej. http://tusitio.com/),
-    # Django buscará las URLs en la app "core".
     path('', include('core.urls')),
 
     path('suma/', include('suma.urls')),
@@ -33,18 +31,16 @@ urlpatterns = [
 
     path('polinomios/', include('polinomios.urls')),
 
-    path('ecuaciones-primer-grado/', include('ecuaciones_primer_grado.urls')),
+    path('ecuaciones_primer_grado/', include('ecuaciones_primer_grado.urls')),
 
-    path('ecuaciones-segundo-grado/', include('ecuaciones_segundo_grado.urls')),
+    path('ecuaciones_segundo_grado/', include('ecuaciones_segundo_grado.urls')),
 
     path('factorizacion/', include('factorizacion.urls')),
 
     path('areas-perimetros/', include('areas_perimetros.urls')),
 
-    # Cuando alguien visite "/division/", Django buscará las URLs en la app "division".
     path('division/', include('division.urls')),
 
-    # Cuando alguien visite "/jerarquia/", Django buscará las URLs en la app "jerarquia".
     path('jerarquia/', include('jerarquia.urls')),
 
     # Cuando alguien visite "/recta-numerica/", Django buscará las URLs en la app "recta_numerica".

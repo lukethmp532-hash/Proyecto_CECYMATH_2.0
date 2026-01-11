@@ -3,7 +3,7 @@
 from django.shortcuts import render
 import math # Importamos la librería math para la raíz cuadrada
 
-def segundo_grado_view(request):
+def ecuaciones_segundo_grado(request):
     resultado = None
     error = None
     valores_originales = {}

@@ -1,6 +1,6 @@
 from django.urls import path
-from .views import segundo_grado_view
+from . import views
 
 urlpatterns = [
-    path('', segundo_grado_view, name='segundo_grado'),
+    path('', views.ecuaciones_segundo_grado, name='ecuaciones_segundo_grado'),
 ]

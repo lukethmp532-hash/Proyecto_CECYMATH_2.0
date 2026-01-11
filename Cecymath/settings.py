@@ -52,8 +52,6 @@ INSTALLED_APPS = [
     'ecuaciones_segundo_grado',
     'factorizacion',
     'areas_perimetros',
-    
-
 ]
 
 MIDDLEWARE = [

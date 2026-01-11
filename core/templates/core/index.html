@@ -1,5 +1,3 @@
-<!-- core/templates/core/index.html -->
-
 {% load static %}
 <!DOCTYPE html>
 <html lang="es">
@@ -11,7 +9,7 @@
 </head>
 <body>
     <header>
-        <h1>Proyecto CECYMATH 2.0</h1>
+        <h1>Operaciones matemáticas - CECYMATH 2.0</h1>
         <p>Reforzando tus conocimientos en matemáticas</p>
     </header>
 
@@ -23,16 +21,14 @@
                 <li><a href="{% url 'resta' %}">Resta</a></li>
                 <li><a href="{% url 'multiplicacion' %}">Multiplicación</a></li>
                 <li><a href="{% url 'division' %}">División</a></li>
-                <li><a href="{% url 'jerarquia' %}">Jerarquía de Operaciones</a></li>
+                <li><a href="{% url 'jerarquia'%}">Jerarquia de Operaciones</a></li>
                 <li><a href="{% url 'recta_numerica' %}">Recta Numérica</a></li>
-                <li><a href="{% url 'polinomios' %}">Polinomios</a></li>
-                <li><a href="{% url 'primer_grado' %}">Ecuaciones de Primer Grado</a></li>
-                <li><a href="{% url 'segundo_grado' %}">Ecuaciones de Segundo Grado</a></li>
-                <li><a href="{% url 'factorizacion' %}">Factorización</a></li>
-                <li><a href="{% url 'areas_perimetros' %}">Áreas y Perímetros</a></li>
-                <!-- Agrega aquí los enlaces para los futuros addons -->
-                <!-- <li><a href="#">Resta (Próximamente)</a></li> -->
-                <!-- <li><a href="#">Multiplicación (Próximamente)</a></li> -->
+                <li><a href="{% url 'ecuaciones_primer_grado' %}">Ecuaciones de primer grado</a></li>
+                <li><a href="{% url 'ecuaciones_segundo_grado' %}">Ecuaciones de segundo grado</a></li>
+                <li><a href="{% url 'factorizacion' %}"> Factorización</a></li>
+                <li><a href="{% url 'areas_perimetros' %}"> Cálculo de áreas y perímetros</a></li>
+
+            
             </ul>
         </section>
     </main>

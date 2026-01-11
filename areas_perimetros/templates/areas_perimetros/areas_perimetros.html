@@ -1,5 +1,3 @@
-<!-- areas_perimetros/templates/areas_perimetros/areas_perimetros.html -->
-
 {% load static %}
 <!DOCTYPE html>
 <html lang="es">
@@ -34,6 +32,7 @@
         <!-- Calculadora para el Cuadrado -->
         <section>
             <h3>Cuadrado</h3>
+            <img src="{% static 'images/cuadrado.png' %}" alt="Cuadrado" style="width:150px; height:auto;">
             <p>Un cuadrado es una figura con cuatro lados iguales y cuatro ángulos rectos (90°).</p>
             <ul>
                 <li><strong>Área:</strong> Se calcula multiplicando la longitud de un lado por sí misma. Fórmula: <strong>Lado × Lado</strong> o <strong>Lado²</strong></li>
@@ -51,6 +50,7 @@
         <!-- Calculadora para el Rectángulo -->
         <section>
             <h3>Rectángulo</h3>
+            <img src="{% static 'images/rectangulo.png' %}" alt="Rectángulo" style="width:150px; height:auto;">
             <p>Un rectángulo es una figura con cuatro lados, donde los lados opuestos son iguales, y tiene cuatro ángulos rectos.</p>
             <ul>
                 <li><strong>Área:</strong> Se calcula multiplicando la longitud de su base por su altura. Fórmula: <strong>Base × Altura</strong></li>
@@ -70,6 +70,7 @@
         <!-- Calculadora para el Círculo -->
         <section>
             <h3>Círculo</h3>
+            <img src="{% static 'images/circulo.png' %}" alt="Círculo" style="width:150px; height:auto;">
             <p>Un círculo es una figura delimitada por una circunferencia. La distancia desde el centro a cualquier punto de la circunferencia se llama radio.</p>
             <ul>
                 <li><strong>Área:</strong> Se calcula multiplicando Pi (π ≈ 3.14159) por el radio al cuadrado. Fórmula: <strong>π × Radio²</strong></li>
@@ -86,13 +87,14 @@
 
         <!-- Calculadora para el Triángulo -->
         <section>
-            <h3>Triángulo Rectángulo</h3>
-            <p>Un triángulo rectángulo es aquel que tiene un ángulo recto (90°). Los lados que forman el ángulo recto se llaman catetos, y el lado opuesto es la hipotenusa.</p>
+            <h3>Triángulo Equilatero</h3>
+            <img src="{% static 'images/triangulo.png' %}" alt="Triángulo Equilátero" style="width:150px; height:auto;">
+            <p>Un triángulo equilátero es un polígono de tres lados donde todos sus lados tienen la misma longitud y, consecuentemente, sus tres ángulos internos son iguales, midiendo cada uno 60 grados</p>
             <ul>
-                <li><strong>Área:</strong> Se calcula multiplicando la base por la altura y dividiendo entre dos. Fórmula: <strong>(Base × Altura) / 2</strong></li>
-                <li><strong>Perímetro:</strong> Es la suma de las longitudes de sus tres lados. Para este ejemplo, calculamos la hipotenusa usando el Teorema de Pitágoras (a² + b² = c²).</li>
+               <li><strong>Área:</strong> Se calcula utilizando la medida del lado (L) con una fórmula específica para triángulos equiláteros. Fórmula: <strong>(√3 / 4) × L²</strong>.<br> También, se puede calcular de otra forma; multiplicando la base por la altura y dividiendo entre dos. Fórmula: <strong>(Base × Altura) / 2</strong></li>
+               <li><strong>Perímetro:</strong> Es la suma de las longitudes de sus tres lados. Al ser todos iguales, simplemente se triplica la medida. Fórmula: <strong>Lado × 3</strong></li>
             </ul>
-            <p style="font-size: 0.9em; color: #555;">Para el perímetro, se asume que la base y la altura son los catetos.</p>
+            <p style="font-size: 0.9em; color: #555;">Para el área, se usara la fórmula (Base × Altura) / 2.</p>
             <form method="post">
                 {% csrf_token %}
                 <input type="hidden" name="figura" value="triangulo">

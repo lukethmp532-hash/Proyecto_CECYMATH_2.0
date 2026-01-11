@@ -32,11 +32,10 @@ def areas_perimetros_view(request):
             elif figura == 'triangulo':
                 base_t = float(request.POST.get('base_t'))
                 altura_t = float(request.POST.get('altura_t'))
-                area = 0.5 * base_t * altura_t
+                area = (base_t * altura_t)/2
                 # Asumimos un triángulo rectángulo para un cálculo de perímetro simple
-                hipotenusa = math.sqrt(base_t**2 + altura_t**2)
-                perimetro = base_t + altura_t + hipotenusa
-                resultado = f"Triángulo Rectángulo: Área = {area:.2f}, Perímetro = {perimetro:.2f}"
+                perimetro = base_t  * 3
+                resultado = f"Triángulo Equilatero: Área = {area:.2f}, Perímetro = {perimetro:.2f}"
 
         except (ValueError, TypeError):
             error = "Por favor, introduce valores numéricos válidos para la figura seleccionada."
