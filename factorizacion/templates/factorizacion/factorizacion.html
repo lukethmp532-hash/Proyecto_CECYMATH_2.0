@@ -1,10 +1,9 @@
-<!-- factorizacion/templates/factorizacion/factorizacion.html -->
-
 {% load static %}
 <!DOCTYPE html>
 <html lang="es">
 <head>
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Factorización - CECYMATH 2.0</title>
     <link rel="stylesheet" href="{% static 'css/style.css' %}">
 </head>
@@ -17,31 +16,99 @@
     </header>
 
     <main>
-        <section id="explicacion">
-            <h2>Factorización</h2>
-            <p>La factorización es el proceso de descomponer una expresión matemática, como un número o un polinomio, en una multiplicación de sus factores. Es el proceso inverso de la multiplicación.</p>
-            <h2>Tipos de Factorización</h2>
-            <p><strong>Factor Común:</strong> Se busca un término (monomio) o una expresión (polinomio) que divida a todos los términos de la expresión original.</p>
-            <p><strong>Agrupación de Términos:</strong> Se agrupan términos que tienen factores comunes para luego aplicar el factor común.</p>
-            <p><strong>Trinomio Cuadrado Perfecto:</strong> Es un trinomio que resulta de elevar un binomio al cuadrado.</p>
-            <h2>Factorización de Trinomios (x² + bx + c)</h2>
-            <p>Factorizar este tipo de trinomio consiste en encontrar dos números que, al ser sumados, den como resultado el coeficiente 'b' y, al ser multiplicados, den el término 'c'.</p>
+        <!-- REQUERIMIENTO 8: Índice de contenidos -->
+        <section id="indice">
+            <h2>Índice de Contenidos</h2>
+            <ul>
+                <li><a href="#teoria">1. Fundamentos Teóricos y Definiciones</a></li>
+                <li><a href="#ejemplos">2. Ejemplos Resueltos</a></li>
+                <li><a href="#calculadora">3. Calculadora de Trinomios</a></li>
+                <li><a href="#recursos">4. Recursos Educativos y Referencias</a></li>
+            </ul>
         </section>
 
+        <!-- REQUERIMIENTOS 1, 2 y 4: Explicación, Definiciones Matemáticas e Imágenes -->
+        <section id="teoria">
+            <h2>1. Fundamentos Teóricos</h2>
+            
+            <h3>Explicación Conceptual</h3>
+            <p>La factorización es el proceso algebraico inverso a la multiplicación. Consiste en descomponer una expresión matemática (un número o un polinomio) en forma de producto de sus factores más simples.</p>
+            <p>Si la multiplicación es  (x+2)(x+3) = x^2 + 5x + 6, la factorización es el camino de regreso:</p>
+            
+            <!-- Imagen Ilustrativa (Placeholder) -->
+            <img src="{% static 'images/factori.png' %}" alt="Esquema visual de factorización" style="max-width: 300px; height:auto; border: 1px solid #ddd; padding: 5px;">
+            <p style="text-align: center; font-size: 0.9rem;"><em>Fig 1. Relación entre producto notable y factorización.</em></p>
+
+            <h3>Definiciones y Tipos Comunes</h3>
+            <ul>
+                <li><strong>Factor Común:</strong> Identificar un término que se repite en todos los elementos del polinomio (ej. $2x + 4 = 2(x+2)$).</li>
+                <li><strong>Diferencia de Cuadrados:</strong> De la forma $a^2 - b^2 = (a+b)(a-b)$.</li>
+                <li><strong>Trinomio Cuadrado Perfecto:</strong> Resulta de elevar un binomio al cuadrado.</li>
+            </ul>
+
+            <h3>Fundamento Matemático para Trinomios (x² + bx + c)</h3>
+            <p>Esta calculadora se enfoca en trinomios de la forma <strong>x² + bx + c</strong>. Para factorizarlos, buscamos dos números, llamémoslos <em>m</em> y <em>n</em>, que cumplan dos condiciones simultáneamente:</p>
+            <ol>
+                <li>Su suma debe ser igual al coeficiente lineal (<strong>m + n = b</strong>).</li>
+                <li>Su producto debe ser igual al término independiente (<strong>m * n = c</strong>).</li>
+            </ol>
+            <p>La factorización resultante será: <strong>(x + m)(x + n)</strong>.</p>
+        </section>
+
+        <!-- REQUERIMIENTO 3: Ejemplos Resueltos -->
+        <section id="ejemplos">
+            <h2>2. Ejemplos Resueltos</h2>
+            
+            <article>
+                <h3>Ejemplo A: Signos Positivos</h3>
+                <p><strong>Factorizar:</strong> x² + 7x + 12</p>
+                <ol>
+                    <li>Buscamos dos números que sumados den <strong>7</strong> y multiplicados den <strong>12</strong>.</li>
+                    <li>Pares que multiplican 12: (1,12), (2,6), (3,4).</li>
+                    <li>Verificamos la suma:
+                        <br> 1 + 12 = 13 (No)
+                        <br> 2 + 6 = 8 (No)
+                        <br> 3 + 4 = 7 (¡Sí!)
+                    </li>
+                    <li>Resultado: <strong>(x + 3)(x + 4)</strong></li>
+                </ol>
+            </article>
+            <hr style="border: 0; border-top: 1px solid #eee; margin: 20px 0;">
+            <article>
+                <h3>Ejemplo B: Signos Negativos</h3>
+                <p><strong>Factorizar:</strong> x² - 5x + 6</p>
+                <ol>
+                    <li>Buscamos dos números que sumados den <strong>-5</strong> y multiplicados den <strong>6</strong>.</li>
+                    <li>Como el producto es positivo y la suma negativa, ambos números deben ser negativos.</li>
+                    <li>Pares posibles: (-1, -6), (-2, -3).</li>
+                    <li>Verificamos la suma:
+                        <br> (-2) + (-3) = -5 (¡Sí!)
+                    </li>
+                    <li>Resultado: <strong>(x - 2)(x - 3)</strong></li>
+                </ol>
+            </article>
+        </section>
+
+        <!-- Sección de Calculadora (Funcionalidad Django) -->
         <section id="calculadora">
-            <h3>Calculadora de Factorización</h3>
+            <h2>3. Calculadora de Trinomios</h2>
+            <p>Introduce los valores para factorizar trinomios de la forma <strong>x² + bx + c</strong>:</p>
             <form action="{% url 'factorizacion' %}" method="post">
                 {% csrf_token %}
-                <label for="b">Coeficiente 'b':</label>
-                <input type="number" id="b" name="b" value="{{ v.b }}" step="1" required>
+                <label for="b">Coeficiente 'b' (término lineal):</label>
+                <input type="number" id="b" name="b" value="{{ v.b }}" step="1" placeholder="Ej: 7" required>
+                
                 <label for="c">Término independiente 'c':</label>
-                <input type="number" id="c" name="c" value="{{ v.c }}" step="1" required>
-                <button type="submit">Factorizar</button>
+                <input type="number" id="c" name="c" value="{{ v.c }}" step="1" placeholder="Ej: 12" required>
+                
+                <button type="submit">Calcular Factorización</button>
             </form>
 
             {% if resultado is not None %}
                 <div id="resultado">
-                    <p>La forma factorizada es: <strong>{{ resultado }}</strong></p>
+                    <p>La forma factorizada es:<br><br>
+                    <span style="font-size: 1.5rem;"><strong>{{ resultado }}</strong></span>
+                    </p>
                 </div>
             {% endif %}
 
@@ -50,6 +117,37 @@
                     <p>{{ error }}</p>
                 </div>
             {% endif %}
+        </section>
+
+        <!-- REQUERIMIENTOS 5, 6, 7 y 9: Recursos y Referencias -->
+        <section id="recursos">
+            <h2>4. Recursos y Bibliografía</h2>
+
+            <h3>Videos Educativos</h3>
+            <ul>
+                <li><a href="https://www.youtube.com/watch?v=PTxV_5n_E14" target="_blank">Factorización de la forma x² + bx + c - Matemáticas Profe Alex</a></li>
+                <li><a href="https://www.youtube.com/watch?v=4Q27Osy-sVc" target="_blank">10 casos de factorización explicados - Math2Me</a></li>
+            </ul>
+
+            <h3>Libros Recomendados</h3>
+            <ul>
+                <li><em>Álgebra</em> - Aurelio Baldor (Capítulo: Descomposición Factorial).</li>
+                <li><em>Matemáticas 1: Álgebra en acción</em> - Cuéllar Carvajal.</li>
+                <li><em>Álgebra Intermedia</em> - Allen R. Angel.</li>
+            </ul>
+
+            <h3>Sitios Web de Consulta Confiables</h3>
+            <ul>
+                <li><a href="https://es.khanacademy.org/math/algebra/x2f8bb11595b61c86:quadratics-multiplying-factoring" target="_blank">Khan Academy: Factorización de cuadráticas</a></li>
+                <li><a href="https://www.disfrutalasmatematicas.com/algebra/factorizar.html" target="_blank">Disfruta Las Matemáticas: Introducción al Algebra</a></li>
+            </ul>
+
+            <h3>Referencias Bibliográficas (APA)</h3>
+            <div style="font-size: 0.9rem; color: #555; background-color: #f9f9f9; padding: 10px; border-left: 3px solid #ccc;">
+                <p>Baldor, A. (2007). <em>Álgebra</em>. Grupo Editorial Patria.</p>
+                <p>Gustafson, R. D., & Frisk, P. D. (2006). <em>Álgebra intermedia</em>. Cengage Learning Editores.</p>
+                <p>Khan Academy. (2023). <em>Introducción a la factorización</em>. Recuperado de https://es.khanacademy.org/</p>
+            </div>
         </section>
     </main>
 </body>

@@ -1,4 +1,3 @@
-<!-- templates/division/division.html -->
 {% load static %}
 <!DOCTYPE html>
 <html lang="es">
@@ -10,40 +9,128 @@
 </head>
 <body>
     <header>
-        <h1>División</h1>
+        <h1>CECYMATH 2.0 - División</h1>
         <nav>
-            <a href="/">Volver al menú principal</a>
+            <a href="{% url 'index' %}">← Volver al Menú Principal</a>
         </nav>
     </header>
+
     <main>
-        <section id="explicacion">
-            <h2>¿Qué es la División?</h2>
-            <p>La división es una de las cuatro operaciones básicas de la aritmética. Consiste en averiguar cuántas veces un número (el divisor) está contenido en otro número (el dividendo).</p>
-            <h3>Términos de la División:</h3>
+        <!-- ÍNDICE -->
+        <section id="indice">
+            <h2>Índice de Contenidos</h2>
             <ul>
-                <li><b>Dividendo:</b> Es el número que se va a dividir.</li>
-                <li><b>Divisor:</b> Es el número que divide.</li>
-                <li><b>Cociente:</b> Es el resultado de la división.</li>
-                <li><b>Resto o Residuo:</b> Es el número que sobra cuando la división no es exacta.</li>
+                <li><a href="#explicacion">1. Concepto de División</a></li>
+                <li><a href="#partes">2. Partes de la División</a></li>
+                <li><a href="#tipos">3. Tipos de División</a></li>
+                <li><a href="#ejemplos">4. Ejemplos Resueltos</a></li>
+                <li><a href="#recursos">5. Recursos y Bibliografía</a></li>
+                <li><a href="#calculadora">6. Calculadora</a></li>
             </ul>
-            <p><b>Ejemplo:</b> Si tenemos 10 galletas y queremos repartirlas entre 2 amigos, a cada amigo le tocarían 5 galletas. Aquí, 10 es el dividendo, 2 es el divisor y 5 es el cociente.</p>
         </section>
 
+        <!-- EXPLICACIÓN -->
+        <section id="explicacion">
+            <h2>1. Concepto de División</h2>
+            <p>La división es una de las cuatro operaciones básicas de la aritmética. Consiste en averiguar cuántas veces un número (el divisor) está contenido en otro número (el dividendo).</p>
+            
+            <h3>Explicación Conceptual</h3>
+            <p>La división es una operación matemática que consiste en repartir una cantidad en partes iguales. Se utiliza en situaciones cotidianas como repartir dinero, comida, tiempo o materiales de manera equitativa.</p>
+        </section>
+
+        <!-- PARTES -->
+        <section id="partes">
+            <h2>2. Partes de la División</h2>
+            <ul>
+                <li><strong>Dividendo:</strong> Es el número que se va a dividir (la cantidad total).</li>
+                <li><strong>Divisor:</strong> Es el número por el cual se divide (en cuántas partes).</li>
+                <li><strong>Cociente:</strong> Es el resultado de la división.</li>
+                <li><strong>Resto o Residuo:</strong> Es el número que sobra cuando la división no es exacta.</li>
+            </ul>
+        </section>
+
+        <!-- TIPOS -->
+        <section id="tipos">
+            <h2>3. Tipos de División</h2>
+            <p>Principalmente existen dos tipos de división:</p>
+            <ul>
+                <li><strong>División Exacta (Sin residuo):</strong> Cuando el resto es igual a cero (0). El dividendo es múltiplo del divisor.</li>
+                <li><strong>División Inexacta o Entera (Con residuo):</strong> Cuando el resto es diferente de cero.</li>
+            </ul>
+        </section>
+
+        <!-- EJEMPLOS -->
+        <section id="ejemplos">
+            <h2>4. Ejemplos Resueltos</h2>
+            
+            <div style="background-color: #f9f9f9; padding: 15px; margin-bottom: 20px; border-left: 4px solid #3498db;">
+                <h3>Ejemplo 1: División Exacta</h3>
+                <p style="font-size: 1.2rem;"><strong>10 ÷ 2 = 5</strong></p>
+                <p><em>Explicación:</em> Si tenemos 10 galletas y queremos repartirlas entre 2 amigos, a cada amigo le tocan 5 galletas y no sobra ninguna.</p>
+            </div>
+
+            <div style="background-color: #f9f9f9; padding: 15px; border-left: 4px solid #e74c3c;">
+                <h3>Ejemplo 2: División Decimal</h3>
+                <p style="font-size: 1.2rem;"><strong>5 ÷ 2 = 2.5</strong></p>
+                <p><em>Explicación:</em> Si repartimos 5 unidades entre 2, tocan a 2 unidades enteras y sobra 1, que al dividirse se convierte en 0.5 (medio).</p>
+            </div>
+        </section>
+
+        <!-- RECURSOS -->
+        <section id="recursos">
+            <h2>5. Recursos Multimedia y Bibliografía</h2>
+            
+            <!-- Imagen -->
+            <div style="text-align: center; margin-bottom: 20px;">
+                <img src="{% static 'images/div.png' %}" alt="Esquema de la división" style="max-width: 300px; height: auto;">
+            </div>
+
+            <h3>Video Explicativo</h3>
+            <ul>
+                <li><a href="https://www.youtube.com/watch?v=PCRCrdJbaCM" target="_blank">La División: Explicación para principiantes - Daniel Carreón</a></li>
+            </ul>
+
+            <h3>Libros Recomendados</h3>
+            <ul>
+                <li><em>Matemáticas básicas</em> – Baldor</li>
+                <li><em>Álgebra elemental</em> – Aurelio Baldor</li>
+                <li><em>Matemáticas para secundaria</em> – SEP</li>
+            </ul>
+
+            <h3>Páginas Web y Referencias</h3>
+            <ul>
+                <li><a href="https://es.khanacademy.org" target="_blank">Khan Academy</a></li>
+                <li><a href="https://www.matematicasvisuales.com/" target="_blank">Matemáticas Visuales</a></li>
+                <li><a href="https://www.math2me.com" target="_blank">Math2Me</a></li>
+            </ul>
+
+            <div style="font-size: 0.9rem; color: #555; background-color: #f9f9f9; padding: 10px; border-left: 3px solid #ccc; margin-top: 20px;">
+                <p><strong>Fuentes de información:</strong></p>
+                <p>Árbol ABC: https://arbolabc.com</p>
+                <p>Educación 3.0: https://www.educaciontrespuntocero.com</p>
+            </div>
+        </section>
+
+        <!-- CALCULADORA -->
         <section id="calculadora">
-            <h3>Calculadora de División</h3>
+            <h3>6. Calculadora de División</h3>
             <form action="{% url 'division' %}" method="post">
                 {% csrf_token %}
-                <label for="dividendo">Dividendo:</label>
-                <input type="number" id="dividendo" name="dividendo" required>
-                <label for="divisor">Divisor:</label>
-                <input type="number" id="divisor" name="divisor" required>
-                <button type="submit">Calcular</button>
+                <label for="dividendo">Dividendo (Número a dividir):</label>
+                <input type="number" id="dividendo" name="dividendo" step="any" required>
+                
+                <label for="divisor">Divisor (Entre cuánto dividir):</label>
+                <input type="number" id="divisor" name="divisor" step="any" required>
+                
+                <button type="submit">Calcular División</button>
             </form>
+
             {% if resultado is not None %}
                 <div id="resultado">
-                    <p>El resultado es: {{ resultado }}</p>
+                    <p>El resultado es: <strong>{{ resultado }}</strong></p>
                 </div>
             {% endif %}
+
             {% if error %}
                 <div id="error">
                     <p>{{ error }}</p>

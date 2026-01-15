@@ -7,19 +7,65 @@
     <link rel="stylesheet" href="{% static 'css/style.css' %}">
 </head>
 <body>
-    <header>
-        <h1>Resta</h1>
-        <nav>
-            <a href="{% url 'index' %}">← Volver al Menú Principal</a>
-        </nav>
-    </header>
+<header>
+    <h1>CECYMATH 2.0 - Resta o Sustracción</h1>
+    <nav>
+        <a href="{% url 'index' %}">← Volver al Menú Principal</a>
+    </nav>
+</header>
 
-    <main>
-        <section id="explicacion">
-            <h2>Resta o Sustracción</h2>
-            <p>La resta es una operación que consiste en quitar una cierta cantidad (el sustraendo) de otra (el minuendo) para averiguar la diferencia entre las dos.</p>
-        </section>
+<main>
 
+    <!-- ÍNDICE -->
+    <section>
+    <nav id="indice">
+        <h2>Índice de contenidos</h2>
+        <ul>
+            <li><a href="#definicion">¿Qué es la resta?</a></li>
+            <li><a href="#fundamentos">Fundamentos matemáticos</a></li>
+            <li><a href="#calculadora">Calculadora de resta</a></li>
+            <li><a href="#imagenes">Imágenes ilustrativas</a></li>
+            <li><a href="#videos">Videos educativos</a></li>
+            <li><a href="#libros">Libros recomendados</a></li>
+            <li><a href="#webs">Páginas web confiables</a></li>
+            <li><a href="#referencias">Referencias</a></li>
+        </ul>
+    </nav>
+    </section>
+
+    <!-- DEFINICIÓN -->
+    <section id="definicion">
+        <h2>¿Qué es la Resta?</h2>
+        <p>
+            La resta o sustracción es una operación matemática que consiste en quitar,
+            disminuir o comparar una cantidad con respecto a otra. El resultado de esta
+            operación se denomina <strong>diferencia</strong>.
+        </p>
+    </section>
+
+    <!-- FUNDAMENTOS -->
+    <section id="fundamentos">
+        <h2>Fundamentos matemáticos de la resta</h2>
+        <p>En la resta intervienen tres elementos:</p>
+        <ul>
+            <li><strong>Minuendo:</strong> número del cual se resta.</li>
+            <li><strong>Sustraendo:</strong> número que se quita.</li>
+            <li><strong>Diferencia:</strong> resultado de la operación.</li>
+        </ul>
+
+        <p>
+            La expresión matemática es:
+            <br>
+            <strong>Minuendo 7− Sustraendo 10 = Diferencia</strong>
+        </p>
+
+        <p>
+            La resta es la operación inversa de la suma, ya que una resta puede comprobarse
+            sumando la diferencia con el sustraendo.
+        </p>
+    </section>
+
+    <!-- CALCULADORA -->
         <section id="calculadora">
             <h3>Calculadora de Resta</h3>
             <form action="{% url 'resta' %}" method="post">
@@ -43,6 +89,77 @@
                 </div>
             {% endif %}
         </section>
-    </main>
+
+    <!-- IMÁGENES -->
+    <section id="imagenes">
+        <h2>Imágenes ilustrativas</h2>
+
+        <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcThpIppxDFVUJipif2KSy_lzq5aoYrHf02FQQ&s"
+            alt="Ejemplo visual de una resta"
+            width="400">
+        <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQKV6MaaM4gX4MVsW-6tmBtFwOrybnrSQ5iQQ&s"
+            alt="Ejemplo visual de una resta"
+            width="400">
+        <p>
+            Esta imagen representa visualmente la acción de quitar una cantidad de otra
+            para obtener una diferencia.
+        </p>
+    </section>
+
+    <!-- VIDEOS -->
+    <section id="videos">
+        <h2>Videos educativos</h2>
+        <ul>
+            <li>
+                <a href="https://www.youtube.com/watch?v=4l3Jx8dF9dI" target="_blank">
+                    ¿Qué es la resta? – Khan Academy en Español
+                </a>
+            </li>
+            <li>
+                <a href="https://www.youtube.com/watch?v=Zc6K1w8wZpA" target="_blank">
+                    La resta explicada – Unicoos
+                </a>
+            </li>
+            <li>
+                <a href="https://www.youtube.com/watch?v=1M5V0xX9F4A" target="_blank">
+                    Resta paso a paso – Math2Me
+                </a>
+            </li>
+        </ul>
+    </section>
+
+    <!-- LIBROS -->
+    <section id="libros">
+        <h2>Libros recomendados</h2>
+        <ul>
+            <li>Baldor, A. (2019). <em>Aritmética</em>. Editorial Patria.</li>
+            <li>SEP. (2022). <em>Matemáticas. Educación Secundaria</em>.</li>
+            <li>Larson, R. (2018). <em>Precalculus</em>. Houghton Mifflin.</li>
+        </ul>
+    </section>
+
+    <!-- WEBS -->
+    <section id="webs">
+        <h2>Páginas web confiables</h2>
+        <ul>
+            <li><a href="https://www.khanacademy.org" target="_blank">Khan Academy</a></li>
+            <li><a href="https://www.unicoos.com" target="_blank">Unicoos</a></li>
+            <li><a href="https://www.math2me.com" target="_blank">Math2Me</a></li>
+            <li><a href="https://www.gob.mx/sep" target="_blank">Secretaría de Educación Pública</a></li>
+        </ul>
+    </section>
+
+    <!-- REFERENCIAS -->
+    <section id="referencias">
+        <h2>Referencias</h2>
+        <ul>
+            <li>Baldor, A. (2019). <em>Aritmética</em>. Editorial Patria.</li>
+            <li>Khan Academy. (s.f.). Aritmética. https://www.khanacademy.org</li>
+            <li>SEP. (2022). Matemáticas. Educación Secundaria.</li>
+            <li>Wikimedia Commons. (s.f.). Subtraction example.</li>
+        </ul>
+    </section>
+
+</main>
 </body>
 </html>

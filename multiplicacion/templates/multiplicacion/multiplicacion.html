@@ -1,41 +1,134 @@
-<!-- multiplicacion/templates/multiplicacion/multiplicacion.html -->
-
 {% load static %}
 <!DOCTYPE html>
 <html lang="es">
 <head>
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Multiplicación - CECYMATH 2.0</title>
     <link rel="stylesheet" href="{% static 'css/style.css' %}">
 </head>
 <body>
     <header>
-        <h1>Multiplicación</h1>
+        <h1>CECYMATH 2.0 - Multiplicación</h1>
         <nav>
             <a href="{% url 'index' %}">← Volver al Menú Principal</a>
         </nav>
     </header>
 
     <main>
-        <section id="explicacion">
-            <h2>Multiplicación</h2>
-            <p>La multiplicación consiste en sumar un número (el multiplicando) tantas veces como indica otro número (el multiplicador).</p>
+        <!-- ÍNDICE -->
+        <section id="indice">
+            <h2>Índice de Contenidos</h2>
+            <ul>
+                <li><a href="#explicacion">1. Concepto de Multiplicación</a></li>
+                <li><a href="#partes">2. Partes de la Multiplicación</a></li>
+                <li><a href="#ejemplos">3. Ejemplos Resueltos</a></li>
+                <li><a href="#recursos">4. Recursos y Bibliografía</a></li>
+                <li><a href="#calculadora">5. Calculadora</a></li>
+            </ul>
         </section>
 
+        <!-- EXPLICACIÓN Y TEORÍA -->
+        <section id="explicacion">
+            <h2>1. Concepto de Multiplicación</h2>
+            <p>La multiplicación es una operación matemática que consiste en sumar un número (el multiplicando) tantas veces como indica otro número (el multiplicador). Es una forma abreviada de realizar una suma repetida.</p>
+            
+            <h3>Explicación Conceptual</h3>
+            <p>Se utiliza para calcular cantidades repetidas, áreas, precios totales y resolver problemas de la vida cotidiana.</p>
+            
+            <div style="background-color: #f9f9f9; padding: 15px; border-left: 4px solid #3498db; margin: 20px 0;">
+                <p><strong>Ejemplo conceptual:</strong></p>
+                <p>Multiplicar <strong>4 × 3</strong> significa sumar el número 4 tres veces:</p>
+                <p style="text-align: center; font-size: 1.2rem;">4 + 4 + 4 = 12</p>
+            </div>
+        </section>
+
+        <!-- PARTES -->
+        <section id="partes">
+            <h2>2. Partes de la Multiplicación</h2>
+            <p>En la multiplicación intervienen los siguientes elementos:</p>
+            <ul>
+                <li><strong>Multiplicando:</strong> El número que se va a multiplicar (o sumar repetidamente).</li>
+                <li><strong>Multiplicador:</strong> El número de veces que se repite el multiplicando.</li>
+                <li><strong>Producto:</strong> El resultado final de la multiplicación.</li>
+            </ul>
+        </section>
+
+        <!-- EJEMPLOS -->
+        <section id="ejemplos">
+            <h2>3. Ejemplos Resueltos</h2>
+            
+            <article>
+                <h3>1.- Ejemplo </h3>
+                <p>5 × 3 = <strong>15</strong></p>
+            </article>
+            
+            <article>
+                <h3>2.- Ejemplo</h3>
+                <p>7 × 9 = <strong>63</strong></p>
+            </article>
+            
+            <article>
+                <h3>Propiedad del Cero</h3>
+                <p>Cualquier número multiplicado por cero da como resultado cero.</p>
+                <p>15 × 0 = <strong>0</strong></p>
+            </article>
+        </section>
+
+        <!-- RECURSOS (Libros, Videos, Fuentes) -->
+        <section id="recursos">
+            <h2>4. Recursos Multimedia y Bibliografía</h2>
+            
+            <!-- Imagen (Asegúrate de tener mul.jpg en static/images/) -->
+            <div style="text-align: center; margin-bottom: 20px;">
+                <img src="{% static 'images/mult.png' %}" alt="Ilustración de multiplicación" style="max-width: 300px; height: auto;">
+            </div>
+
+            <h3>Video Explicativo</h3>
+            <ul>
+                <!-- He puesto un enlace genérico, asegúrate de poner el link correcto del video -->
+                <li><a href="https://www.youtube.com/watch?v=CpBVPMBXvt4" target="_blank">Cómo hacer una multiplicación - Daniel Carreón</a></li>
+                <li><a href="https://youtu.be/YFtEaVw5k1A?si=dErc0Rl1bjm0US5Q" target="_blank">Aprendiendo a multiplicar. La Multiplicación | Vídeos Educativos para niños</a></li>
+            </ul>
+
+            <h3>Libros Recomendados</h3>
+            <ul>
+                <li><em>Matemáticas básicas</em> – Aurelio Baldor</li>
+                <li><em>Aritmética</em> – SEP</li>
+                <li><em>Álgebra elemental</em> – Aurelio Baldor</li>
+            </ul>
+
+            <h3>Páginas Web y Referencias</h3>
+            <ul>
+                <li><a href="https://es.khanacademy.org" target="_blank">Khan Academy</a></li>
+                <li><a href="https://www.math2me.com" target="_blank">Math2Me</a></li>
+                <li><a href="https://es.wikipedia.org/wiki/Multiplicación" target="_blank">Wikipedia – Multiplicación</a></li>
+            </ul>
+            
+            <div style="font-size: 0.9rem; color: #555; background-color: #f9f9f9; padding: 10px; border-left: 3px solid #ccc; margin-top: 20px;">
+                <p><strong>Fuentes citadas:</strong></p>
+                <p>Smartick: https://www.smartick.es</p>
+                <p>BBC Bitesize: https://www.bbc.co.uk/bitesize</p>
+            </div>
+        </section>
+
+        <!-- CALCULADORA -->
         <section id="calculadora">
-            <h3>Calculadora de Multiplicación</h3>
+            <h3>5. Calculadora de Multiplicación</h3>
             <form action="{% url 'multiplicacion' %}" method="post">
                 {% csrf_token %}
                 <label for="num1">Primer factor:</label>
                 <input type="number" id="num1" name="num1" value="{{ valores_originales.num1 }}" step="any" required>
+                
                 <label for="num2">Segundo factor:</label>
                 <input type="number" id="num2" name="num2" value="{{ valores_originales.num2 }}" step="any" required>
+                
                 <button type="submit">Multiplicar</button>
             </form>
 
             {% if resultado is not None %}
                 <div id="resultado">
-                    <p>El resultado es: {{ resultado }}</p>
+                    <p>El resultado es: <strong>{{ resultado }}</strong></p>
                 </div>
             {% endif %}
 

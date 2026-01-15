@@ -1,9 +1,9 @@
-
 {% load static %}
 <!DOCTYPE html>
 <html lang="es">
 <head>
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Ecuaciones de Segundo Grado - CECYMATH 2.0</title>
     <link rel="stylesheet" href="{% static 'css/style.css' %}">
 </head>
@@ -16,26 +16,98 @@
     </header>
 
     <main>
-        <section id="explicacion">
-            <h2>Ecuaciones de Segundo Grado</h2>
-            <p>Una ecuación de segundo grado, también conocida como ecuación cuadrática, es una ecuación algebraica en la que la máxima potencia de la incógnita es 2.</p>
-            <p>Una ecuación de segundo grado tiene tres términos: el término cuadrático ax^2, el término lineal bx y el término independiente c, donde a, b y c son constantes y a ≠ 0. </p>
-            <h2>Resolver Ecuaciones de la Forma ax² + bx + c = 0</h2>
-            <p>Se utiliza la fórmula general (o fórmula cuadrática) para encontrar los valores de x que satisfacen la ecuación.</p>
-            <img src="{% static 'images/formula.png' %}" alt="Formula general" style="width:150px; height:auto;">
+        <!-- REQUERIMIENTO 8: Índice de contenidos -->
+        <section id="indice">
+            <h2>Índice de Contenidos</h2>
+            <ul>
+                <li><a href="#teoria">1. Fundamentos Teóricos y Definiciones</a></li>
+                <li><a href="#ejemplos">2. Ejemplos Resueltos</a></li>
+                <li><a href="#calculadora">3. Calculadora Interactiva</a></li>
+                <li><a href="#recursos">4. Recursos Educativos y Referencias</a></li>
+            </ul>
         </section>
 
+        <!-- REQUERIMIENTOS 1, 2 y 4: Explicación, Definiciones Matemáticas e Imágenes -->
+        <section id="teoria">
+            <h2>1. Fundamentos Teóricos</h2>
+            
+            <h3>Explicación Conceptual</h3>
+            <p>Una ecuación de segundo grado (o cuadrática) es una igualdad algebraica donde la incógnita aparece elevada, como máximo, a la potencia dos. Gráficamente, estas ecuaciones representan una <strong>parábola</strong> en el plano cartesiano.</p>
+            
+            <!-- Imagen Ilustrativa (Placeholder para gráfica de parábola) -->
+            <img src="{% static 'images/parabola.png' %}" alt="Gráfica de una parábola representativa" style="max-width: 300px; height:auto; border: 1px solid #ddd; padding: 5px;">
+            <p style="text-align: center; font-size: 0.9rem;"><em>Fig 1. Representación gráfica de una función cuadrática.</em></p>
+
+            <h3>Definiciones y Fundamentos Matemáticos</h3>
+            <p>La forma estándar de una ecuación cuadrática completa es:</p>
+            <p style="text-align: center; font-size: 1.9rem; font-weight: bold;">ax² + bx + c = 0</p>
+            <ul>
+                <li><strong>Término Cuadrático (ax²):</strong> Determina la concavidad de la parábola. 'a' debe ser distinto de 0.</li>
+                <li><strong>Término Lineal (bx):</strong> Influye en el desplazamiento horizontal.</li>
+                <li><strong>Término Independiente (c):</strong> Indica el punto de corte con el eje Y.</li>
+            </ul>
+
+            <h3>Método de Solución: Fórmula General</h3>
+            <p>Para encontrar las raíces (soluciones) de la ecuación, utilizamos la fórmula general:</p>
+            
+            <!-- Imagen de la fórmula (Existente) -->
+            <img src="{% static 'images/formula.png' %}" alt="Fórmula general cuadrática" style="width:200px; height:auto;">
+            
+            <p>El valor dentro de la raíz, <strong>b² - 4ac</strong>, se llama <em>Discriminante</em> (Δ):</p>
+            <ul>
+                <li>Si <strong>Δ > 0</strong>: Existen dos soluciones reales y diferentes.</li>
+                <li>Si <strong>Δ = 0</strong>: Existe una única solución real (raíz doble).</li>
+                <li>Si <strong>Δ < 0</strong>: No hay solución real (soluciones complejas).</li>
+            </ul>
+        </section>
+
+        <!-- REQUERIMIENTO 3: Ejemplos Resueltos -->
+        <section id="ejemplos">
+            <h2>2. Ejemplos Resueltos</h2>
+            
+            <article>
+                <h3>Ejemplo A: Dos soluciones reales</h3>
+                <p><strong>Resolver:</strong> x² - 5x + 6 = 0</p>
+                <ol>
+                    <li>Identificamos coeficientes: a = 1, b = -5, c = 6.</li>
+                    <li>Sustituimos en la fórmula general:
+                        <br>x = [ -(-5) ± √((-5)² - 4(1)(6)) ] / 2(1)
+                    </li>
+                    <li>Simplificamos:
+                        <br>x = [ 5 ± √(25 - 24) ] / 2
+                        <br>x = [ 5 ± √1 ] / 2
+                    </li>
+                    <li>Obtenemos las dos soluciones:
+                        <br>x₁ = (5 + 1) / 2 = <strong>3</strong>
+                        <br>x₂ = (5 - 1) / 2 = <strong>2</strong>
+                    </li>
+                </ol>
+            </article>
+            <hr style="border: 0; border-top: 1px solid #eee; margin: 20px 0;">
+            <article>
+                <h3>Ejemplo B: Solución única</h3>
+                <p><strong>Resolver:</strong> x² - 4x + 4 = 0</p>
+                <p>Calculamos el discriminante: b² - 4ac = (-4)² - 4(1)(4) = 16 - 16 = 0.</p>
+                <p>Como el discriminante es 0, la solución es x = -b / 2a = -(-4) / 2 = <strong>2</strong>.</p>
+            </article>
+        </section>
+
+        <!-- Sección de Calculadora (Funcionalidad Django) -->
         <section id="calculadora">
-            <h3>Calculadora con Fórmula General</h3>
+            <h2>3. Calculadora Interactiva</h2>
+            <p>Introduce los coeficientes para calcular las raíces automáticamente:</p>
             <form action="{% url 'ecuaciones_segundo_grado' %}" method="post">
                 {% csrf_token %}
-                <label for="a">Coeficiente 'a' (el número que acompaña a x²):</label>
-                <input type="number" id="a" name="a" value="{{ v.a }}" step="any" required>
-                <label for="b">Coeficiente 'b' (el número que acompaña a x):</label>
-                <input type="number" id="b" name="b" value="{{ v.b }}" step="any" required>
+                <label for="a">Coeficiente 'a' (término cuadrático):</label>
+                <input type="number" id="a" name="a" value="{{ v.a }}" step="any" placeholder="Ej: 1" required>
+                
+                <label for="b">Coeficiente 'b' (término lineal):</label>
+                <input type="number" id="b" name="b" value="{{ v.b }}" step="any" placeholder="Ej: -5" required>
+                
                 <label for="c">Término independiente 'c':</label>
-                <input type="number" id="c" name="c" value="{{ v.c }}" step="any" required>
-                <button type="submit">Resolver Ecuación</button>
+                <input type="number" id="c" name="c" value="{{ v.c }}" step="any" placeholder="Ej: 6" required>
+                
+                <button type="submit">Calcular Soluciones</button>
             </form>
 
             {% if resultado is not None %}
@@ -49,6 +121,37 @@
                     <p>{{ error }}</p>
                 </div>
             {% endif %}
+        </section>
+
+        <!-- REQUERIMIENTOS 5, 6, 7 y 9: Videos, Libros, Webs y Citado -->
+        <section id="recursos">
+            <h2>4. Recursos y Bibliografía</h2>
+
+            <h3>Videos Educativos</h3>
+            <ul>
+                <li><a href="https://www.youtube.com/watch?v=IGhjsc8lEKY" target="_blank">Introducción a las Ecuaciones Cuadráticas - Matemáticas Profe Alex</a></li>
+                <li><a href="https://www.youtube.com/watch?v=BxrJmKdPHRs" target="_blank">Fórmula General: Explicación paso a paso - Julioprofe</a></li>
+            </ul>
+
+            <h3>Libros Recomendados</h3>
+            <ul>
+                <li><em>Álgebra</em> - Aurelio Baldor (Capítulo: Ecuaciones de Segundo Grado).</li>
+                <li><em>Álgebra y Trigonometría</em> - Dennis G. Zill.</li>
+                <li><em>Matemáticas Simplificadas</em> - CONAMAT.</li>
+            </ul>
+
+            <h3>Sitios Web de Consulta Confiables</h3>
+            <ul>
+                <li><a href="https://es.khanacademy.org/math/algebra/x2f8bb11595b61c86:quadratic-functions-equations" target="_blank">Khan Academy: Ecuaciones Cuadráticas</a></li>
+                <li><a href="https://www.geogebra.org/m/t3q4z8n7" target="_blank">GeoGebra: Exploración gráfica de parábolas</a></li>
+            </ul>
+
+            <h3>Referencias Bibliográficas (APA)</h3>
+            <div style="font-size: 0.9rem; color: #555; background-color: #f9f9f9; padding: 10px; border-left: 3px solid #ccc;">
+                <p>Baldor, A. (2007). <em>Álgebra</em>. Grupo Editorial Patria.</p>
+                <p>Stewart, J., Redlin, L., & Watson, S. (2012). <em>Precálculo: Matemáticas para el cálculo</em>. Cengage Learning.</p>
+                <p>Khan Academy. (2023). <em>Resolución de ecuaciones cuadráticas</em>. Recuperado de https://es.khanacademy.org/</p>
+            </div>
         </section>
     </main>
 </body>

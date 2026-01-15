@@ -1,12 +1,14 @@
-<!-- jerarquia/templates/jerarquia/jerarquia.html -->
-
 {% load static %}
 <!DOCTYPE html>
 <html lang="es">
 <head>
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Jerarquía de Operaciones - CECYMATH 2.0</title>
     <link rel="stylesheet" href="{% static 'css/style.css' %}">
+    <!-- MathJax para fórmulas bonitas -->
+    <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
 </head>
 <body>
     <header>
@@ -17,39 +19,212 @@
     </header>
 
     <main>
+        <section id="indice">
+            <h2>Índice de Contenidos</h2>
+            <ul>
+                <li><a href="#explicacion">1. Explicación Teórica</a></li>
+                <li><a href="#ejemplo">2. Ejemplo Paso a Paso</a></li>
+                <li><a href="#calculadora">3. Calculadora de Jerarquía</a></li>
+                <li><a href="#recursos">4. Recursos y Bibliografía</a></li>
+            </ul>
+        </section>
+
         <section id="explicacion">
-            <h2>¿Qué es la Jerarquía de Operaciones?</h2>
-            <p>Es el orden estricto en el que se deben realizar las operaciones matemáticas para garantizar que el resultado sea siempre el mismo. La regla se conoce comúnmente como <strong>PEMDAS</strong>.</p>
-            <ol>
-                <li><strong>P</strong>aréntesis: ( ), [ ], { }</li>
-                <li><strong>E</strong>xponentes: x², √</li>
-                <li><strong>M</strong>ultiplicación y <strong>D</strong>ivisión: (de izquierda a derecha)</li>
-                <li><strong>A</strong>dición (Suma) y <strong>S</strong>ustracción (Resta): (de izquierda a derecha)</li>
-            </ol>
-             <p><strong>Ejemplo:</strong> En la expresión <code>5 + 2 * 3</code>, primero se hace <code>2 * 3 = 6</code>, y luego <code>5 + 6 = 11</code>.</p>
+            <h2>1. ¿Qué es la Jerarquía de Operaciones?</h2>
+            <p>Es el orden estricto (PEMDAS) en el que se deben realizar las operaciones matemáticas:</p>
+            
+            <div style="text-align: center; margin: 20px 0;">
+                <img src="{% static 'images/pemdas.png' %}" alt="Regla PEMDAS" style="max-width: 300px; height: auto; border: 1px solid #ddd; padding: 5px;">
+            </div>
+
+            <div class="ejemplo-box" style="background-color: #f8f9fa; border-left: 5px solid #3498db; padding: 15px;">
+                <ol>
+                    <li><strong>P</strong>aréntesis: \( ( ) \)</li>
+                    <li><strong>E</strong>xponentes (Potencias y Raíces): \( x^n, \sqrt{x} \)</li>
+                    <li><strong>M</strong>ultiplicación y <strong>D</strong>ivisión (de izquierda a derecha)</li>
+                    <li><strong>A</strong>dición y <strong>S</strong>ustracción (de izquierda a derecha)</li>
+                </ol>
+            </div>
+        </section>
+
+        <section id="ejemplo">
+            <h2>2. Ejemplo Resuelto</h2>
+            <div class="ejemplo-box">
+                <p><strong>Expresión:</strong> \( 5 + 2 \times 3^2 \)</p>
+                <p>1. Potencia primero: \( 3^2 = 9 \) &rarr; Queda \( 5 + 2 \times 9 \)</p>
+                <p>2. Multiplicación: \( 2 \times 9 = 18 \) &rarr; Queda \( 5 + 18 \)</p>
+                <p>3. Suma final: \( 5 + 18 = 23 \)</p>
+            </div>
         </section>
 
         <section id="calculadora">
-            <h3>Calculadora de Jerarquía</h3>
-            <form action="{% url 'jerarquia' %}" method="post">
+            <h2>3. Calculadora Paso a Paso</h2>
+            <p>Introduce la expresión (puedes usar ^ para potencias, ejemplo: <code>2^3 + 5 * (4 - 2)</code>):</p>
+            
+            <form method="post" onsubmit="event.preventDefault(); resolverPasoAPaso();">
                 {% csrf_token %}
-                <label for="expresion">Introduce la expresión matemática:</label>
-                <input type="text" id="expresion" name="expresion" value="{{ expresion_original }}" required placeholder="Ej: (5 + 3) * 2">
-                <button type="submit">Calcular</button>
+                <div class="form-container">
+                    <label for="expresionInput">Expresión matemática:</label>
+                    <input type="text" id="expresionInput" name="expresion" 
+                        value="{{ expresion_original }}" 
+                        placeholder="Ej: (3+4)*65/4^2" autocomplete="off">
+                    <button type="submit">Calcular y Mostrar Pasos</button>
+                </div>
             </form>
 
-            {% if resultado is not None %}
-                <div id="resultado">
-                    <p>El resultado es: {{ resultado }}</p>
-                </div>
-            {% endif %}
+            <div id="contenedorPasos" style="display: none; margin-top: 20px;">
+                <h3>Procedimiento:</h3>
+                <div id="listaPasos"></div>
+            </div>
 
-            {% if error %}
-                <div id="error">
-                    <p>{{ error }}</p>
-                </div>
-            {% endif %}
+            <div id="error" style="display: none;">
+                <p id="textoError"></p>
+            </div>
+        </section>
+
+        <section id="recursos">
+            <h2>4. Recursos y Bibliografía</h2>
+            <ul>
+                <li><a href="https://es.khanacademy.org/math/cc-sixth-grade-math/cc-6th-arithmetic-operations/cc-6th-order-of-operations/v/introduction-to-order-of-operations" target="_blank">Video: Orden de operaciones - Khan Academy</a></li>
+            </ul>
+            <div style="font-size: 0.9rem; color: #555; background-color: #f9f9f9; padding: 10px; border-left: 3px solid #ccc; margin-top: 20px;">
+                <p><strong>Bibliografía:</strong> Baldor, A. (2017). <em>Aritmética</em>. Grupo Editorial Patria.</p>
+            </div>
         </section>
     </main>
+
+    <script>
+        function resolverPasoAPaso() {
+            const input = document.getElementById('expresionInput').value;
+            const divPasos = document.getElementById('contenedorPasos');
+            const listaPasos = document.getElementById('listaPasos');
+            const divError = document.getElementById('error');
+            const textoErr = document.getElementById('textoError');
+
+            // Resetear interfaz
+            divPasos.style.display = 'none';
+            divError.style.display = 'none';
+            listaPasos.innerHTML = '';
+
+            if (!input.trim()) return;
+
+            try {
+                // Validación básica
+                if (!/^[0-9+\-*/().\s\^]+$/.test(input)) {
+                    throw new Error("Caracteres no válidos. Usa solo números, +, -, *, /, ^ y ().");
+                }
+
+                let expresionActual = input.replace(/\s+/g, '');
+                let pasos = [];
+                let iteraciones = 0;
+                const maxIteraciones = 50; 
+
+                let str = expresionActual;
+                pasos.push(`Expresión inicial: ${str}`);
+
+                while (iteraciones < maxIteraciones) {
+                    // Si ya es solo un número, terminamos
+                    if (/^-?\d+(\.\d+)?$/.test(str)) {
+                        break;
+                    }
+
+                    let match;
+                    let nuevoStr = str;
+                    let accion = "";
+
+                    // 1. PARENTESIS
+                    if ((match = str.match(/\(([^()]+)\)/))) {
+                        const contenido = match[1];
+                        const resInterno = evaluarExpresionSimple(contenido); 
+                        nuevoStr = str.replace(match[0], resInterno);
+                        // AQUI: Agregamos las negritas <strong>
+                        accion = `<strong>Resolver paréntesis</strong> (${contenido})`;
+                    }
+                    // 2. EXPONENTES
+                    else if ((match = str.match(/(-?\d+(?:\.\d+)?)\^(-?\d+(?:\.\d+)?)/))) {
+                        const base = parseFloat(match[1]);
+                        const exp = parseFloat(match[2]);
+                        const res = Math.pow(base, exp);
+                        nuevoStr = str.replace(match[0], res);
+                        // AQUI: Agregamos las negritas <strong>
+                        accion = `<strong>Potencia</strong>: ${base}^${exp} = ${res}`;
+                    }
+                    // 3. MULT Y DIV
+                    else if ((match = str.match(/(-?\d+(?:\.\d+)?)([\*\/])(-?\d+(?:\.\d+)?)/))) {
+                        const n1 = parseFloat(match[1]);
+                        const op = match[2];
+                        const n2 = parseFloat(match[3]);
+                        let res = 0;
+                        if (op === '*') res = n1 * n2;
+                        if (op === '/') {
+                            if (n2 === 0) throw new Error("División por cero.");
+                            res = n1 / n2;
+                        }
+                        // Redondeamos pasos intermedios a 4 decimales para que no se haga enorme la cadena
+                        // pero mantenemos precisión para el cálculo final
+                        let resMostrar = (res % 1 !== 0) ? parseFloat(res.toFixed(4)) : res;
+
+                        nuevoStr = str.replace(match[0], resMostrar);
+                        // AQUI: Agregamos las negritas <strong>
+                        accion = `<strong>${op === '*' ? 'Multiplicar' : 'Dividir'}</strong>: ${n1} ${op} ${n2} = ${resMostrar}`;
+                    }
+                    // 4. SUMA Y RESTA
+                    else if ((match = str.match(/(?<!^)(-?\d+(?:\.\d+)?)([\+\-])(-?\d+(?:\.\d+)?)/))) {
+                        const evaluado = evaluarMatematicaSegura(str);
+                        nuevoStr = evaluado.toString();
+                        accion = `<strong>Suma/Resta final</strong>`;
+                    } 
+                    else {
+                        if (/[+\-]/.test(str)) {
+                            const evaluado = evaluarMatematicaSegura(str);
+                            nuevoStr = evaluado.toString();
+                            accion = "<strong>Resolver sumas/restas restantes</strong>";
+                        } else {
+                            break;
+                        }
+                    }
+
+                    if (nuevoStr === str) break;
+                    str = nuevoStr;
+                    pasos.push(`${accion} &rarr; ${str}`); // Quitamos el <strong> del resultado intermedio para limpieza
+                    iteraciones++;
+                }
+
+                // Generar HTML de los pasos
+                listaPasos.innerHTML = pasos.map(p => `<div class="paso-item">${p}</div>`).join('');
+                
+                // --- LÓGICA DE REDONDEO FINAL ---
+                let valorFinal = parseFloat(str);
+                let valorMostrar = str;
+
+                // Si es un número válido y tiene decimales, aplicamos toFixed(2)
+                if (!isNaN(valorFinal)) {
+                    // Verificamos si es entero o decimal
+                    if (valorFinal % 1 !== 0) {
+                        valorMostrar = valorFinal.toFixed(2);
+                    }
+                }
+
+                listaPasos.innerHTML += `<div class="resultado-final">Resultado: ${valorMostrar}</div>`;
+                divPasos.style.display = 'block';
+
+            } catch (e) {
+                textoErr.innerHTML = "Error: " + e.message;
+                divError.style.display = 'block';
+            }
+        }
+
+        function evaluarExpresionSimple(expr) {
+            let segura = expr.replace(/\^/g, '**');
+            let res = eval(segura);
+            // Redondear intermedios para evitar cadenas infinitas
+            return (res % 1 !== 0) ? parseFloat(res.toFixed(6)) : res; 
+        }
+
+        function evaluarMatematicaSegura(expr) {
+            let segura = expr.replace(/\^/g, '**');
+            return eval(segura);
+        }
+    </script>
 </body>
 </html>

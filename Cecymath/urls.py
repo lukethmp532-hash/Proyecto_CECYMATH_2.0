@@ -45,4 +45,6 @@ urlpatterns = [
 
     # Cuando alguien visite "/recta-numerica/", Django buscará las URLs en la app "recta_numerica".
     path('recta-numerica/', include('recta_numerica.urls')),
+
+    path('agradecimientos/', include('agradecimientos.urls')),
 ]

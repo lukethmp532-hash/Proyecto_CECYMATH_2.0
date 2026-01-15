@@ -1,63 +1,169 @@
-<!-- polinomios/templates/polinomios/polinomios.html -->
-
 {% load static %}
 <!DOCTYPE html>
 <html lang="es">
 <head>
     <meta charset="UTF-8">
-    <title>Suma de Polinomios - CECYMATH 2.0</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Polinomios - CECYMATH 2.0</title>
     <link rel="stylesheet" href="{% static 'css/style.css' %}">
+    <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
 </head>
 <body>
     <header>
-        <h1>CECYMATH 2.0 - Suma de Polinomios</h1>
+        <h1>CECYMATH 2.0 - Polinomios</h1>
         <nav>
             <a href="{% url 'index' %}">← Volver al Menú Principal</a>
         </nav>
     </header>
 
     <main>
-        <section id="explicacion">
-             <h2>Polinomios</h2>
-            <p>Un polinomio es una expresión algebraica formada por la suma de varios términos (monomios), donde cada término es el producto de una constante (coeficiente) y una o más variables elevadas a potencias enteras no negativas. Un ejemplo de polinomio es \(4x^{3}-2x^{2}+7x-1\), que está compuesto por cuatro términos. </p>
-            <h2>Suma de Polinomios de Segundo Grado</h2>
-            <p>Para sumar dos polinomios, simplemente suma los coeficientes (los números) de los términos que tienen la misma variable elevada a la misma potencia (términos semejantes).</p>
+        <section id="indice">
+            <h3>Índice de Contenidos</h3>
+            <ul>
+                <li><a href="#teoria">1. Fundamentos Teóricos</a></li>
+                <li><a href="#ejemplos">2. Ejemplos Resueltos</a></li>
+                <li><a href="#calculadora">3. Calculadora de Polinomios</a></li>
+                <li><a href="#recursos">4. Recursos y Bibliografía</a></li>
+            </ul>
         </section>
 
+        <!-- TEORÍA -->
+        <section id="teoria">
+            <h2>1. Fundamentos Matemáticos</h2>
+            <p>Un polinomio es una expresión algebraica formada por la suma de varios monomios no semejantes. Cada monomio se llama <strong>término</strong>.</p>
+            
+            <div class="ejemplo-box" style="background-color: #f0f4f8; padding: 15px; border-left: 5px solid #2980b9;">
+                <p><strong>Partes de un término:</strong> En \( -5x^2 \):</p>
+                <ul>
+                    <li><strong>Coeficiente:</strong> -5</li>
+                    <li><strong>Variable (o parte literal):</strong> x</li>
+                    <li><strong>Exponente (o grado):</strong> 2</li>
+                </ul>
+            </div>
+
+            <div class="contenedor-imagen" style="text-align: center; margin: 20px 0;">
+                <!-- Placeholder para imagen -->
+                <img src="{% static 'images/poli.webp' %}" alt="Estructura de un polinomio" style="max-width: 300px; height: auto; border-radius: 8px; border: 1px solid #ddd; padding: 5px;">
+            </div>
+
+            <h3>Operaciones Básicas</h3>
+            <ul>
+                <li><strong>Suma y Resta:</strong> Solo se pueden sumar o restar los <em>términos semejantes</em> (los que tienen la misma letra y el mismo exponente).</li>
+                <li><strong>Multiplicación:</strong> Se multiplican los coeficientes y se <em>suman los exponentes</em> de las variables iguales.</li>
+            </ul>
+        </section>
+
+        <!-- EJEMPLOS -->
+        <section id="ejemplos">
+            <h2>2. Ejemplos Resueltos</h2>
+            
+            <article style="background: #fff; border: 1px solid #eee; padding: 15px; border-radius: 8px; margin-bottom: 20px;">
+                <h4 style="margin-top:0; color: #27ae60;">Ejemplo A: Suma de Polinomios</h4>
+                <p><strong>Problema:</strong> \((2x^2 + 4x) + (3x^2 - 2x)\)</p>
+                <ol>
+                    <li>Agrupamos términos semejantes (los de \(x^2\) con \(x^2\), y \(x\) con \(x\)):<br>
+                        \((2+3)x^2 + (4-2)x\)
+                    </li>
+                    <li>Resolvemos los coeficientes:<br>
+                        \(5x^2 + 2x\)
+                    </li>
+                </ol>
+            </article>
+
+            <article style="background: #fff; border: 1px solid #eee; padding: 15px; border-radius: 8px;">
+                <h4 style="margin-top:0; color: #8e44ad;">Ejemplo B: Multiplicación de Monomio por Polinomio</h4>
+                <p><strong>Problema:</strong> \(2x \cdot (3x^2 - 4)\)</p>
+                <ol>
+                    <li>Aplicamos propiedad distributiva:<br>
+                        \((2x \cdot 3x^2) + (2x \cdot -4)\)
+                    </li>
+                    <li>Multiplicamos coeficientes y sumamos exponentes:<br>
+                        \(6x^{(1+2)} - 8x\)
+                    </li>
+                    <li>Resultado: \(6x^3 - 8x\)</li>
+                </ol>
+            </article>
+        </section>
+
+        <!-- CALCULADORA -->
         <section id="calculadora">
-            <h3>Calculadora de Suma de Polinomios</h3>
-            <form action="{% url 'polinomios' %}" method="post">
+            <h2>3. Calculadora de Polinomios</h2>
+            <p>Introduce los polinomios usando la variable 'x' (ejemplo: <code>2x^2 + 3x - 5</code>).</p>
+            
+            <form method="post">
                 {% csrf_token %}
-                <h4>Primer Polinomio (ax² + bx + c)</h4>
-                <label for="a1">Coeficiente de x² (a):</label>
-                <input type="number" id="a1" name="a1" value="{{ p.a1|default:0 }}" step="any" required>
-                <label for="b1">Coeficiente de x (b):</label>
-                <input type="number" id="b1" name="b1" value="{{ p.b1|default:0 }}" step="any" required>
-                <label for="c1">Término constante (c):</label>
-                <input type="number" id="c1" name="c1" value="{{ p.c1|default:0 }}" step="any" required>
+                
+                <label for="polinomio1">Primer Polinomio:</label>
+                <input type="text" id="polinomio1" name="polinomio1" 
+                    placeholder="Ej: 4x^2 - 2x + 1" required 
+                    value="{{ v.p1 }}">
 
-                <h4>Segundo Polinomio (dx² + ex + f)</h4>
-                <label for="a2">Coeficiente de x² (d):</label>
-                <input type="number" id="a2" name="a2" value="{{ p.a2|default:0 }}" step="any" required>
-                <label for="b2">Coeficiente de x (e):</label>
-                <input type="number" id="b2" name="b2" value="{{ p.b2|default:0 }}" step="any" required>
-                <label for="c2">Término constante (f):</label>
-                <input type="number" id="c2" name="c2" value="{{ p.c2|default:0 }}" step="any" required>
+                <label for="polinomio2">Segundo Polinomio:</label>
+                <input type="text" id="polinomio2" name="polinomio2" 
+                    placeholder="Ej: 3x^2 + 5" required 
+                    value="{{ v.p2 }}">
 
-                <button type="submit">Sumar Polinomios</button>
+                <!-- NUEVO DISEÑO DE MENÚ DE SELECCIÓN -->
+                <p style="font-weight: bold; margin-bottom: 5px; margin-top: 20px;">Selecciona la operación:</p>
+                
+                <div class="selector-operacion">
+                    <!-- Opción Suma -->
+                    <input type="radio" id="op_suma" name="operacion" value="suma" 
+                        {% if v.op == 'suma' or not v.op %}checked{% endif %}>
+                    <label for="op_suma"><span class="icono-op">+</span> Sumar</label>
+
+                    <!-- Opción Resta -->
+                    <input type="radio" id="op_resta" name="operacion" value="resta"
+                        {% if v.op == 'resta' %}checked{% endif %}>
+                    <label for="op_resta"><span class="icono-op">−</span> Restar</label>
+
+                    <!-- Opción Multiplicación -->
+                    <input type="radio" id="op_mult" name="operacion" value="multiplicacion"
+                        {% if v.op == 'multiplicacion' %}checked{% endif %}>
+                    <label for="op_mult"><span class="icono-op">×</span> Multiplicar</label>
+                </div>
+
+                <button type="submit" style="width: 100%;">Calcular Resultado</button>
             </form>
 
-            {% if resultado is not None %}
-                <div id="resultado">
-                    <p>El polinomio resultante es: <strong>{{ resultado }}</strong></p>
+            <!-- RESULTADOS -->
+            {% if resultado %}
+                <div id="resultado" style="margin-top: 30px; padding: 20px; background-color: #e8f8f5; border: 2px solid #2ecc71; border-radius: 8px; text-align: center;">
+                    <h3 style="color: #27ae60; margin: 0 0 10px 0;">Resultado:</h3>
+                    <!-- Usamos MathJax delimiters para que se vea matemático -->
+                    <p style="font-size: 1.4rem; margin: 0;">\( {{ resultado }} \)</p>
                 </div>
             {% endif %}
 
             {% if error %}
-                <div id="error">
-                    <p>{{ error }}</p>
+                <div id="error" style="margin-top: 30px; padding: 15px; background-color: #fce4ec; border: 2px solid #c2185b; border-radius: 8px; text-align: center;">
+                    <p style="color: #c2185b; font-weight: bold; margin: 0;">{{ error }}</p>
                 </div>
             {% endif %}
+        </section>
+
+        <!-- RECURSOS -->
+        <section id="recursos">
+            <h3>4. Recursos Adicionales</h3>
+            
+            <strong>Vídeos Educativos:</strong>
+            <ul>
+                <li><a href="https://www.youtube.com/watch?v=S0Tq42y3e_U" target="_blank">Suma y resta de polinomios - Matemáticas profe Alex</a></li>
+                <li><a href="https://www.youtube.com/watch?v=6-1NJt3-ltg" target="_blank">Multiplicación de polinomios paso a paso - Daniel Carreón</a></li>
+            </ul>
+
+            <strong>Sitios Web Confiables:</strong>
+            <ul>
+                <li><a href="https://es.khanacademy.org/math/algebra2/x2ec2f6f830c9fb89:poly-arithmetic" target="_blank">Khan Academy - Aritmética de Polinomios</a></li>
+                <li><a href="https://www.geogebra.org/m/Wqz7xZ5K" target="_blank">GeoGebra - Graficadora de Polinomios</a></li>
+            </ul>
+            
+            <div style="font-size: 0.9rem; color: #555; background-color: #f9f9f9; padding: 10px; border-left: 3px solid #ccc; margin-top: 20px;">
+                <strong>Bibliografía:</strong><br>
+                <p>Baldor, A. (2017). <em>Álgebra</em>. Grupo Editorial Patria.</p>
+                <p>Stewart, J. (2012). <em>Precálculo: Matemáticas para el cálculo</em>. Cengage Learning.</p>
+            </div>
         </section>
     </main>
 </body>

@@ -1,40 +1,69 @@
-# polinomios/views.py
-
 from django.shortcuts import render
+from sympy import symbols, expand, latex
+
+
+from sympy.parsing.sympy_parser import (
+    parse_expr, 
+    standard_transformations, 
+    implicit_multiplication_application, 
+    convert_xor
+)
 
 def polinomios_view(request):
     resultado = None
     error = None
-    polinomios_originales = {}
+    valores_originales = {
+        'p1': '',
+        'p2': '',
+        'op': 'suma'
+    }
 
     if request.method == 'POST':
+        p1_raw = request.POST.get('polinomio1', '')
+        p2_raw = request.POST.get('polinomio2', '')
+        operacion = request.POST.get('operacion', 'suma')
+
+        valores_originales = {
+            'p1': p1_raw,
+            'p2': p2_raw,
+            'op': operacion
+        }
+
         try:
-            # Coeficientes del primer polinomio (ax^2 + bx + c)
-            a1 = float(request.POST.get('a1', 0))
-            b1 = float(request.POST.get('b1', 0))
-            c1 = float(request.POST.get('c1', 0))
+            # Definimos las transformaciones:
+            # 1. standard_transformations: Reglas básicas de Python.
+            # 2. implicit_multiplication_application: Permite escribir "2x" en vez de "2*x".
+            # 3. convert_xor: Convierte el símbolo "^" en potencia "**".
+            transformaciones = (standard_transformations + (implicit_multiplication_application, convert_xor))
+
+            # Usamos parse_expr con las transformaciones en lugar de sympify directo
+            poly1 = parse_expr(p1_raw, transformations=transformaciones)
+            poly2 = parse_expr(p2_raw, transformations=transformaciones)
+
+            # Realizar la operación seleccionada
+            res_sympy = None
             
-            # Coeficientes del segundo polinomio (dx^2 + ex + f)
-            a2 = float(request.POST.get('a2', 0))
-            b2 = float(request.POST.get('b2', 0))
-            c2 = float(request.POST.get('c2', 0))
+            if operacion == 'suma':
+                res_sympy = poly1 + poly2
+            elif operacion == 'resta':
+                res_sympy = poly1 - poly2
+            elif operacion == 'multiplicacion':
+                res_sympy = expand(poly1 * poly2)
+            else:
+                error = "Operación no válida."
 
-            polinomios_originales = {'a1': a1, 'b1': b1, 'c1': c1, 'a2': a2, 'b2': b2, 'c2': c2}
+            # Formatear a LaTeX para que se vea bonito en el HTML
+            if res_sympy is not None:
+                resultado = latex(res_sympy)
 
-            # Sumamos los coeficientes correspondientes
-            sum_a = a1 + a2
-            sum_b = b1 + b2
-            sum_c = c1 + c2
-
-            # Formateamos el resultado para mostrarlo de forma legible
-            resultado = f"{sum_a}x² + {sum_b}x + {sum_c}".replace('+ -', '- ')
-
-        except (ValueError, TypeError):
-            error = "Por favor, introduce coeficientes numéricos válidos."
+        except Exception as e:
+            # Mensaje de error amigable
+            error = f"No pudimos entender el polinomio. Asegúrate de usar 'x' u otras letras y números. (Error técnico: {e})"
 
     contexto = {
         'resultado': resultado,
         'error': error,
-        'p': polinomios_originales # Abreviatura para el diccionario
+        'v': valores_originales
     }
+
     return render(request, 'polinomios/polinomios.html', contexto)

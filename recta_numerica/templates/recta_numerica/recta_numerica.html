@@ -1,13 +1,11 @@
-<!-- recta_numerica/templates/recta_numerica/recta_numerica.html -->
-
 {% load static %}
 <!DOCTYPE html>
 <html lang="es">
 <head>
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Recta Numérica - CECYMATH 2.0</title>
     <link rel="stylesheet" href="{% static 'css/style.css' %}">
-    
 </head>
 <body>
     <header>
@@ -18,46 +16,129 @@
     </header>
 
     <main>
-        <section class="explicacion">
-        <h2>Recta Numérica</h2>
-        <p>Una recta numérica es una línea recta que representa los números de manera ordenada y equidistante. El cero generalmente se ubica en el centro, los números positivos se extienden hacia la derecha y los negativos hacia la izquierda. Se usa para visualizar, comparar y operar números, como sumas y restas, ya que permite ver su posición y magnitud relativa.  </p>
+        <!-- REQUERIMIENTO 8: Índice de contenidos -->
+        <section id="indice">
+            <h2>Índice de Contenidos</h2>
+            <ul>
+                <li><a href="#teoria">1. Fundamentos Teóricos y Definiciones</a></li>
+                <li><a href="#ejemplos">2. Ejemplos de Ubicación</a></li>
+                <li><a href="#generador">3. Generador Interactivo</a></li>
+                <li><a href="#recursos">4. Recursos Educativos y Referencias</a></li>
+            </ul>
         </section>
 
-        <section id="Generador">
-            <h2>Generador de Recta Numérica</h2>
-            <p>Introduce números (positivos, negativos o decimales) separados por comas para verlos representados en la recta.</p>
-        
-        
-            <h3 style="border-top: 1px solid rgb(168, 166, 166);">Introduce los números</h3>
-            <form action="{% url 'recta_numerica' %}" method="post">
-                {% csrf_token %}
-                <label for="numeros">Números separados por comas:</label>
-                <input type="text" id="numeros" name="numeros" value="{{ numeros_originales }}" required placeholder="Ej: -10, 0, 5.5, 15">
-                <button type="submit">Dibujar en la Recta</button>
-            </form>
+        <!-- REQUERIMIENTOS 1, 2 y 4: Explicación, Definiciones Matemáticas e Imágenes -->
+        <section id="teoria">
+            <h2>1. Fundamentos Teóricos</h2>
+            
+            <h3>Explicación Conceptual</h3>
+            <p>La recta numérica es un gráfico unidimensional de una línea en la que los números reales (enteros, decimales, fraccionarios) son representados como puntos especialmente marcados que están separados uniformemente.</p>
+            
+            <!-- Imagen Ilustrativa (Placeholder) -->
+            <img src="{% static 'images/recta_ejemplo.png' %}" alt="Ilustración básica de la recta numérica" style="max-width: 80%; height:auto; border: 1px solid #ddd; padding: 5px;">
+            <p style="text-align: center; font-size: 0.9rem;"><em>Fig 1. Distribución de enteros positivos y negativos.</em></p>
 
-            <!-- Solo muestra la sección de la recta si 'puntos' existe -->
-            {% if puntos %}
-                <div id="resultado_grafico" style="margin-top:50px;">
-                    <h3>Tu Recta Numérica:</h3>
-                    <div class="recta-container">
-                        <div class="recta-linea"></div>
-                        <!-- Iteramos sobre cada punto que la vista nos envió -->
-                        {% for punto in puntos %}
-                            <!-- Colocamos cada punto usando su posición porcentual calculada -->
-                            <div class="recta-punto" style="left: {{ punto.posicion }}%;">
-                                <span class="punto-etiqueta">{{ punto.valor }}</span>
-                            </div>
-                        {% endfor %}
+            <h3>Definiciones Clave</h3>
+            <ul>
+                <li><strong>El Origen (0):</strong> Es el punto de partida. Divide la recta en dos semirrectas.</li>
+                <li><strong>Números Positivos:</strong> Se ubican a la <em>derecha</em> del cero. Indican aumento o ganancia.</li>
+                <li><strong>Números Negativos:</strong> Se ubican a la <em>izquierda</em> del cero. Indican disminución, deuda o temperaturas bajo cero.</li>
+                <li><strong>Valor Absoluto:</strong> Es la distancia de un número al cero, sin importar el signo (ej: |-5| = 5).</li>
+            </ul>
+        </section>
+
+        <!-- REQUERIMIENTO 3: Ejemplos Resueltos -->
+        <section id="ejemplos">
+            <h2>2. Ejemplos de Ubicación y Comparación</h2>
+            
+        
+                <h3>Ejemplo A: Comparación de Enteros</h3>
+                <p style="text-align: center;"><strong>Problema:</strong> Determinar cuál número es mayor: -5 o -2.</p>
+                <ol>
+                    <li>Ubicamos ambos números en la recta.</li>
+                    <li>El -5 está más a la izquierda. El -2 está más a la derecha (más cerca del cero).</li>
+                    <li><strong>Regla:</strong> En la recta numérica, cualquier número a la derecha es mayor que uno a la izquierda.</li>
+                    <li><strong>Resultado:</strong> -2 > -5 (Menos dos es mayor que menos cinco).</li>
+                </ol>
+            
+            <hr style="border: 0; border-top: 1px solid #eee; margin: 20px 0;">
+            <article>
+                <h3>Ejemplo B: Ubicación de Decimales</h3>
+                <p><strong>Problema:</strong> Ubicar 2.5 en la recta.</p>
+                <p>El número 2.5 es positivo, así que va a la derecha. Es mayor que 2 pero menor que 3. Se ubica exactamente en el punto medio entre el entero 2 y el entero 3.</p>
+            </article>
+        </section>
+
+        <!-- Sección del Generador (Funcionalidad Django Existente) -->
+        <section id="generador">
+            <h2>3. Generador Interactivo</h2>
+            <p>Esta herramienta te permite visualizar la posición exacta de varios números simultáneamente.</p>
+            
+            <div style="background: #fdfdfd; padding: 20px; border: 1px solid #eee; border-radius: 8px;">
+                <h3 style="margin-top: 0;">Introduce los datos</h3>
+                <p style="font-size: 0.9rem; color: #666;">Ingresa números enteros o decimales separados por comas (Ej: -10, 0, 5.5, 15).</p>
+                
+                <form action="{% url 'recta_numerica' %}" method="post">
+                    {% csrf_token %}
+                    <label for="numeros">Números:</label>
+                    <input type="text" id="numeros" name="numeros" value="{{ numeros_originales }}" required placeholder="Ej: -5, 2, 3.5">
+                    <button type="submit">Dibujar en la Recta</button>
+                </form>
+
+                <!-- Lógica de visualización -->
+                {% if puntos %}
+                    <div id="resultado_grafico" style="margin-top:50px;">
+                        <h3 style="text-align: center; color: #2c3e50;">Representación Gráfica:</h3>
+                        <div class="recta-container" style="margin-bottom: 60px;">
+                            <div class="recta-linea"></div>
+                            <!-- Iteramos sobre cada punto que la vista nos envió -->
+                            {% for punto in puntos %}
+                                <!-- Colocamos cada punto usando su posición porcentual calculada -->
+                                <div class="recta-punto" style="left: {{ punto.posicion }}%;">
+                                    <span class="punto-etiqueta">{{ punto.valor }}</span>
+                                </div>
+                            {% endfor %}
+                        </div>
                     </div>
-                </div>
-            {% endif %}
+                {% endif %}
 
-            {% if error %}
-                <div id="error">
-                    <p>{{ error }}</p>
-                </div>
-            {% endif %}
+                {% if error %}
+                    <div id="error">
+                        <p>{{ error }}</p>
+                    </div>
+                {% endif %}
+            </div>
+        </section>
+
+        <!-- REQUERIMIENTOS 5, 6, 7 y 9: Recursos y Referencias -->
+        <section id="recursos">
+            <h2>4. Recursos y Bibliografía</h2>
+
+            <h3>Videos Educativos</h3>
+            <ul>
+                <li><a href="https://www.youtube.com/watch?v=b4dE3Yg0-tU" target="_blank">Ubicar números en la recta numérica - Daniel Carreón</a></li>
+                <li><a href="https://www.youtube.com/watch?v=O1MfbKfbCg0" target="_blank">Introducción a los Números Reales - Matemáticas profe Alex</a></li>
+            </ul>
+
+            <h3>Libros Recomendados</h3>
+            <ul>
+                <li><em>Álgebra</em> - Aurelio Baldor (Capítulo: Los Números Relativos).</li>
+                <li><em>Matemáticas 1: Aritmética y Álgebra</em> - D.G. Zill.</li>
+                <li><em>Cálculo y Geometría Analítica</em> - Larson & Hostetler.</li>
+            </ul>
+
+            <h3>Sitios Web de Consulta Confiables</h3>
+            <ul>
+                <li><a href="https://es.khanacademy.org/math/cc-sixth-grade-math/cc-6th-negative-number-topic" target="_blank">Khan Academy: Números Negativos</a></li>
+                <li><a href="https://www.geogebra.org/m/KHQ9wwZa" target="_blank">GeoGebra: Simulador de Recta Numérica</a></li>
+            </ul>
+
+            <h3>Referencias Bibliográficas (APA)</h3>
+            <div style="font-size: 0.9rem; color: #555; background-color: #f9f9f9; padding: 10px; border-left: 3px solid #ccc;">
+                <p>Baldor, A. (2007). <em>Álgebra</em>. Grupo Editorial Patria.</p>
+                <p>Larson, R., & Edwards, B. H. (2010). <em>Cálculo 1 de una variable</em>. McGraw-Hill Interamericana.</p>
+                <p>Khan Academy. (2023). <em>Números en la recta numérica</em>. Recuperado de https://es.khanacademy.org/</p>
+            </div>
         </section>
     </main>
 </body>

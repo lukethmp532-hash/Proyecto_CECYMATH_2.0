@@ -9,41 +9,165 @@
     <link rel="stylesheet" href="{% static 'css/style.css' %}">
 </head>
 <body>
-    <header>
-        <h1>CECYMATH 2.0 - Suma o Adición</h1>
-        <nav>
-            <a href="{% url 'index' %}">← Volver al Menú Principal</a>
-        </nav>
-    </header>
+<header>
+    <h1>CECYMATH 2.0 - Suma o Adición</h1>
+    <nav>
+        <a href="{% url 'index' %}">← Volver al Menú Principal</a>
+    </nav>
+</header>
 
-    <main>
-        <section id="explicacion">
-            <h2>¿Qué es la Suma?</h2>
-            <p>La suma o adición es la operación matemática que resulta al reunir en una sola varias cantidades. Los números que se suman se llaman <strong>sumandos</strong> y el resultado se llama <strong>suma</strong> o <strong>total</strong>.</p>
-        </section>
+<main>
 
-        <section id="calculadora">
-            <h3>Calculadora de Suma</h3>
-            <form action="{% url 'suma' %}" method="post">
-                {% csrf_token %}
-                <label for="numero1">Primer sumando:</label>
-                <input type="number" id="numero1" name="numero1" value="{{ valores.num1 }}" step="any" required>
-                <label for="numero2">Segundo sumando:</label>
-                <input type="number" id="numero2" name="numero2" value="{{ valores.num2 }}" step="any" required>
-                <button type="submit">Calcular Suma</button>
-            </form>
+    <!-- ÍNDICE -->
+    <section>
+    <nav id="indice">
+        <h2>Índice de contenidos</h2>
+        <ul>
+            <li><a href="#definicion">¿Qué es la suma?</a></li>
+            <li><a href="#fundamentos">Fundamentos matemáticos</a></li>
+            <li><a href="#calculadora">Calculadora de suma</a></li>
+            <li><a href="#imagenes">Imágenes ilustrativas</a></li>
+            <li><a href="#videos">Videos educativos</a></li>
+            <li><a href="#libros">Libros recomendados</a></li>
+            <li><a href="#webs">Páginas web confiables</a></li>
+            <li><a href="#referencias">Referencias</a></li>
+        </ul>
+    </nav>
+    </section>
 
-            {% if resultado is not None %}
-                <div id="resultado">
-                    <p>El resultado es: {{ resultado }}</p>
-                </div>
-            {% endif %}
-            {% if error %}
-                <div id="error">
-                    <p>{{ error }}</p>
-                </div>
-            {% endif %}
-        </section>
-    </main>
+    <!-- DEFINICIÓN -->
+    <section id="definicion">
+        <h2>¿Qué es la Suma?</h2>
+        <p>
+            La suma o adición es una operación matemática que consiste en reunir dos o más
+            cantidades para obtener un total. El resultado de esta operación se llama
+            <strong>suma</strong> o <strong>total</strong>.
+        </p>
+    </section>
+
+    <!-- FUNDAMENTOS -->
+    <section id="fundamentos">
+        <h2>Fundamentos matemáticos de la suma</h2>
+        <p>En la suma intervienen los siguientes elementos:</p>
+        <ul>
+            <li><strong>Sumandos:</strong> números que se agregan.</li>
+            <li><strong>Suma o total:</strong> resultado de la operación.</li>
+        </ul>
+
+        <p>
+            La expresión matemática es:70
+            <br>
+            <strong>Sumando 35 + Sumando  35 = Suma 70</strong>
+        </p>
+
+        <p>
+            La suma cumple propiedades importantes como:
+        </p>
+        <ul>
+            <li><strong>Conmutativa:</strong> el orden de los sumandos no altera el resultado.</li>
+            <li><strong>Asociativa:</strong> la forma de agrupar no cambia la suma.</li>
+            <li><strong>Elemento neutro:</strong> sumar cero no cambia el número.</li>
+        </ul>
+    </section>
+
+    <!-- CALCULADORA -->
+    <section id="calculadora">
+        <h2>Calculadora de Suma</h2>
+
+        <form action="{% url 'suma' %}" method="post">
+            {% csrf_token %}
+
+            <label for="numero1">Primer sumando:</label>
+            <input type="number" id="numero1" name="numero1" value="{{ valores.num1 }}" step="any" required>
+
+            <label for="numero2">Segundo sumando:</label>
+            <input type="number" id="numero2" name="numero2" value="{{ valores.num2 }}" step="any" required>
+
+            <button type="submit">Calcular Suma</button>
+        </form>
+
+        {% if resultado is not None %}
+        <div id="resultado">
+            <p>El resultado es: {{ resultado }}</p>
+        </div>
+        {% endif %}
+
+        {% if error %}
+        <div id="error">
+            <p>{{ error }}</p>
+        </div>
+        {% endif %}
+    </section>
+
+    <!-- IMÁGENES -->
+    <section id="imagenes">
+        <h2>Imágenes ilustrativas</h2>
+
+        <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQO3oP6uyhOHmYFYnnAuD3MnQda9tqavWnClg&s"
+            alt="Ejemplo visual de una suma"
+            width="400">
+        <img src="https://tomi-digital-resources.storage.googleapis.com/images/classes/resources/rsc-762325-6099c82d07c55.png"
+            alt="Ejemplo visual de una suma"
+            width="400">
+
+        <p style="text-align: center;">
+            La imagen muestra cómo se combinan cantidades para obtener un total.
+        </p>
+    </section>
+
+    <!-- VIDEOS -->
+    <section id="videos">
+        <h2>Videos educativos</h2>
+        <ul>
+            <li>
+                <a href="https://youtu.be/t98G7TaHHqg?si=VW2g1mOxY6_FwoRg" target="_blank">
+                    ¿Qué es la suma? – Profeacadmic
+                </a>
+            </li>
+            <li>
+                <a href="https://youtu.be/oexd_Dfic_Q?si=r8GvBz9BpJS3xd1h" target="_blank">
+                    Aprendiendo a sumar. La Suma | Vídeos Educativos – Happy Learning Español
+                </a>
+            </li>
+            <li>
+                <a href="https://youtu.be/6Eqcz3TKTxo?si=dd7cxUFfPMgdMTvo" target="_blank">
+                    Definición de SUMA | Todo lo que necesitas saber – Matemáticas con Grajeda
+                </a>
+            </li>
+        </ul>
+    </section>
+
+    <!-- LIBROS -->
+    <section id="libros">
+        <h2>Libros recomendados</h2>
+        <ul>
+            <li>Baldor, A. (2019). <em>Aritmética</em>. Editorial Patria.</li>
+            <li>SEP. (2022). <em>Matemáticas. Educación Secundaria</em>.</li>
+            <li>Stewart, J. (2018). <em>Precalculus</em>. Cengage Learning.</li>
+        </ul>
+    </section>
+
+    <!-- WEBS -->
+    <section id="webs">
+        <h2>Páginas web confiables</h2>
+        <ul>
+            <li><a href="https://www.khanacademy.org" target="_blank">Khan Academy</a></li>
+            <li><a href="https://www.unicoos.com" target="_blank">Unicoos</a></li>
+            <li><a href="https://www.math2me.com" target="_blank">Math2Me</a></li>
+        </ul>
+    </section>
+
+    <!-- REFERENCIAS -->
+    <section id="referencias">
+        <h2>Referencias</h2>
+        <ul>
+            <li>Baldor, A. (2019). <em>Aritmética</em>. Editorial Patria.</li>
+            <li>Khan Academy. (s.f.). Aritmética. https://www.khanacademy.org</li>
+            <li>SEP. (2022). Matemáticas. Educación Secundaria.</li>
+            <li>Wikimedia Commons. (s.f.). Addition example.</li>
+        </ul>
+    </section>
+
+</main>
 </body>
 </html>

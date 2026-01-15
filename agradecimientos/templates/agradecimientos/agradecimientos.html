@@ -1,0 +1,67 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Agradecimientos - CECYMATH 2.0</title>
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+</head>
+<body>
+    <header>
+        <h1>CECYMATH 2.0</h1>
+        <p>Centro de Estudios Científicos y Tecnológicos del Estado de México Plantel La Paz</p>
+        <nav>
+            <a href="{% url 'index' %}">← Volver al Menú Principal</a>
+        </nav>
+    </header>
+
+    <main>
+        <section class="contenido-centrado">
+            <h2 style="color: #3498db; border-bottom: 2px solid #eee; padding-bottom: 15px; margin-bottom: 20px;">Agradecimientos y Créditos</h2>
+            
+            <p style="margin-bottom: 40px; font-style: italic; color: #555;">
+                Este proyecto educativo ha sido desarrollado con el objetivo de facilitar el aprendizaje de las matemáticas a través de herramientas interactivas.
+            </p>
+            
+            <!-- SECCIÓN EQUIPO -->
+            <div style="margin-bottom: 40px;">
+                <h3 style="color: #2c3e50;">Equipo de Desarrollo</h3>
+                <!-- Aplicamos la clase que quita el relleno izquierdo -->
+                <ul class="lista-nombres">
+                    <li>Julio Cesar Cervantes Gómez</li>
+                    <li>Carlos Emiliano Martinez Cruz</li>
+                    <li>Lesly Jimena Santiago Ramirez</li>
+                    <li>José Gerardo Sánchez Vivero</li>
+                    <li>Emily Nahomi Cruz Giron</li>
+                </ul>
+            </div>
+
+            <!-- SECCIÓN DOCENTE -->
+            <div style="margin-bottom: 40px;">
+                <h3 style="color: #2c3e50;">Asesoría Docente</h3>
+                <p style="font-size: 1.1rem; margin-bottom: 5px;"><strong>Profesor(a):</strong> Miguel Oswaldo Cisneros Fernández</p>
+                
+                <!-- Ajuste para que el texto de la materia se vea ordenado -->
+                <p class="texto-materia">
+                    <strong>Materia:</strong> Emplea frameworks para el desarrollo de software y Aplica metodologías ágiles para el desarrollo de software.
+                </p>
+            </div>
+
+            <!-- SECCIÓN INSTITUCIÓN -->
+            <div style="margin-bottom: 20px;">
+                <h3 style="color: #2c3e50;">Institución</h3>
+                <!-- Asegúrate de tener la imagen o borra la etiqueta img si no la usas -->
+                <img src="{% static 'images/cecy.png' %}" alt="Logo CECYTEM" style="width: 120px; height: auto; margin: 15px auto; display: block;">
+                
+                <p style="font-size: 1.2rem; font-weight: bold; color: #27ae60;">CECYTEM</p>
+                <p>CECYTEM - [Plantel La Paz]</p>
+            </div>
+        </section>
+    </main>
+
+    <footer style="text-align: center; padding: 20px; color: #95a5a6; font-size: 0.9rem; margin-top: 30px; border-top: 1px solid #eee;">
+        <p>&copy; 2026 CECYMATH 2.0 - Todos los derechos reservados.</p>
+    </footer>
+</body>
+</html>

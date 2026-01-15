@@ -3,6 +3,7 @@
 <html lang="es">
 <head>
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Áreas y Perímetros - CECYMATH 2.0</title>
     <link rel="stylesheet" href="{% static 'css/style.css' %}">
 </head>
@@ -13,97 +14,181 @@
             <a href="{% url 'index' %}">← Volver al Menú Principal</a>
         </nav>
     </header>
+
     <main>
-        <section class="explicacion">
-            <h2>Fórmulas de Áreas y Perímetros</h2>
-            <p>Aquí encontrarás las fórmulas básicas para calcular el área y el perímetro de las figuras geométricas más comunes.</p>
+        <!-- REQUERIMIENTO 8: Índice de contenidos -->
+        <section id="indice">
+            <h2>Índice de Contenidos</h2>
+            <ul>
+                <li><a href="#teoria">1. Fundamentos Teóricos y Definiciones</a></li>
+                <li><a href="#ejemplos">2. Ejemplos Resueltos</a></li>
+                <li><a href="#calculadoras">3. Calculadoras de Figuras Geométricas</a></li>
+                <li><a href="#recursos">4. Recursos Educativos y Referencias</a></li>
+            </ul>
         </section>
-        {% if resultado %}
-            <div id="resultado" style="margin-bottom: 30px;">
-                <p><strong>{{ resultado }}</strong></p>
+
+        <!-- REQUERIMIENTOS 1, 2 y 4: Explicación, Definiciones Matemáticas e Imágenes -->
+        <section id="teoria">
+            <h2>1. Fundamentos Teóricos</h2>
+            
+            <h3>Conceptos Generales</h3>
+            <p><strong>Perímetro:</strong> Es la distancia alrededor de una figura bidimensional, es decir, la longitud de su contorno o frontera. Se mide en unidades lineales (cm, m).</p>
+            <p><strong>Área:</strong> Es la medida de la superficie encerrada dentro del perímetro de una figura. Se mide en unidades cuadradas (cm², m²).</p>
+            
+            <!-- Imagen general -->
+            <img src="{% static 'images/area_peri.png' %}" alt="Comparación visual entre área y perímetro" style="max-width: 300px; height:auto; border: 1px solid #ddd; padding: 5px;">
+
+            <h3>Definiciones por Figura</h3>
+            
+            <h4>El Cuadrado</h4>
+            <p>Polígono regular de cuatro lados iguales y cuatro ángulos de 90°.
+                <br><em>Fórmulas:</em> Área = $L^2$ | Perímetro = $4 \times L$</p>
+
+            <h4>El Rectángulo</h4>
+            <p>Paralelogramo cuyos cuatro lados forman ángulos rectos entre sí. Los lados opuestos tienen la misma longitud.
+                <br><em>Fórmulas:</em> Área = $b \times h$ | Perímetro = $2(b + h)$</p>
+
+            <h4>El Círculo</h4>
+            <p>Región delimitada por una circunferencia. El radio ($r$) es la distancia del centro al borde.
+                <br><em>Fórmulas:</em> Área = $\pi \times r^2$ | Perímetro = $2 \times \pi \times r$</p>
+
+            <h4>El Triángulo Equilátero</h4>
+            <p>Polígono de tres lados iguales.
+                <br><em>Fórmulas:</em> Área = $(b \times h) / 2$ | Perímetro = $3 \times L$</p>
+        </section>
+
+        <!-- REQUERIMIENTO 3: Ejemplos Resueltos -->
+        <section id="ejemplos">
+            <h2>2. Ejemplos Resueltos</h2>
+            
+            <article>
+                <h3>Ejemplo A: Calcular un Rectángulo</h3>
+                <p><strong>Problema:</strong> Calcula el área y perímetro de un rectángulo con base de 10 cm y altura de 5 cm.</p>
+                <ol>
+                    <li><strong>Datos:</strong> b = 10, h = 5.</li>
+                    <li><strong>Área:</strong> A = b × h = 10 × 5 = <strong>50 cm²</strong>.</li>
+                    <li><strong>Perímetro:</strong> P = 2(b + h) = 2(10 + 5) = 2(15) = <strong>30 cm</strong>.</li>
+                </ol>
+            </article>
+            <hr style="border: 0; border-top: 1px solid #eee; margin: 20px 0;">
+            <article>
+                <h3>Ejemplo B: Calcular un Círculo</h3>
+                <p><strong>Problema:</strong> Calcula el área de un círculo con radio de 3 metros (usando π ≈ 3.1416).</p>
+                <ol>
+                    <li><strong>Fórmula:</strong> A = π × r²</li>
+                    <li><strong>Sustitución:</strong> A = 3.1416 × (3)²</li>
+                    <li><strong>Cálculo:</strong> A = 3.1416 × 9 = <strong>28.27 m²</strong>.</li>
+                </ol>
+            </article>
+        </section>
+
+        <!-- Sección de Calculadoras (Funcionalidad Django) -->
+        <section id="calculadoras">
+            <h2>3. Calculadoras Interactivas</h2>
+            <p>Selecciona la figura, introduce los datos y presiona "Calcular".</p>
+
+            <!-- Bloque de Resultados / Errores -->
+            {% if resultado %}
+                <div id="resultado" style="margin-bottom: 30px;">
+                    <p><strong>{{ resultado }}</strong></p>
+                </div>
+            {% endif %}
+            {% if error %}
+                <div id="error" style="margin-bottom: 30px;">
+                    <p>{{ error }}</p>
+                </div>
+            {% endif %}
+
+            <!-- Grid para organizar las calculadoras visualmente mejor -->
+            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 20px;">
+                
+                <!-- 1. Cuadrado -->
+                <div style="background: #f9f9f9; padding: 15px; border-radius: 8px; border: 1px solid #eee;">
+                    <h3>Cuadrado</h3>
+                    <img src="{% static 'images/cuadrado.png' %}" alt="Icono Cuadrado" style="width:80px; height:auto; margin: 0 auto 10px; display:block;">
+                    <form method="post">
+                        {% csrf_token %}
+                        <input type="hidden" name="figura" value="cuadrado">
+                        <label for="lado">Lado:</label>
+                        <input type="number" name="lado" step="any" placeholder="Ej: 5" required>
+                        <button type="submit" style="width: 100%; margin-top: 10px;">Calcular</button>
+                    </form>
+                </div>
+
+                <!-- 2. Rectángulo -->
+                <div style="background: #f9f9f9; padding: 15px; border-radius: 8px; border: 1px solid #eee;">
+                    <h3>Rectángulo</h3>
+                    <img src="{% static 'images/rectangulo.png' %}" alt="Icono Rectángulo" style="width:100px; height:auto; margin: 0 auto 10px; display:block;">
+                    <form method="post">
+                        {% csrf_token %}
+                        <input type="hidden" name="figura" value="rectangulo">
+                        <label for="base">Base:</label>
+                        <input type="number" name="base" step="any" required>
+                        <label for="altura">Altura:</label>
+                        <input type="number" name="altura" step="any" required>
+                        <button type="submit" style="width: 100%; margin-top: 10px;">Calcular</button>
+                    </form>
+                </div>
+
+                <!-- 3. Círculo -->
+                <div style="background: #f9f9f9; padding: 15px; border-radius: 8px; border: 1px solid #eee;">
+                    <h3>Círculo</h3>
+                    <img src="{% static 'images/circulo.png' %}" alt="Icono Círculo" style="width:80px; height:auto; margin: 0 auto 10px; display:block;">
+                    <form method="post">
+                        {% csrf_token %}
+                        <input type="hidden" name="figura" value="circulo">
+                        <label for="radio">Radio:</label>
+                        <input type="number" name="radio" step="any" placeholder="Ej: 3" required>
+                        <button type="submit" style="width: 100%; margin-top: 10px;">Calcular</button>
+                    </form>
+                </div>
+
+                <!-- 4. Triángulo -->
+                <div style="background: #f9f9f9; padding: 15px; border-radius: 8px; border: 1px solid #eee;">
+                    <h3>Triángulo Equilátero</h3>
+                    <img src="{% static 'images/triangulo.png' %}" alt="Icono Triángulo" style="width:80px; height:auto; margin: 0 auto 10px; display:block;">
+                    <form method="post">
+                        {% csrf_token %}
+                        <input type="hidden" name="figura" value="triangulo">
+                        <label for="base_t">Base:</label>
+                        <input type="number" name="base_t" step="any" required>
+                        <label for="altura_t">Altura:</label>
+                        <input type="number" name="altura_t" step="any" required>
+                        <button type="submit" style="width: 100%; margin-top: 10px;">Calcular</button>
+                    </form>
+                </div>
             </div>
-        {% endif %}
-        {% if error %}
-            <div id="error" style="margin-bottom: 30px;">
-                <p>{{ error }}</p>
+        </section>
+
+        <!-- REQUERIMIENTOS 5, 6, 7 y 9: Recursos y Referencias -->
+        <section id="recursos">
+            <h2>4. Recursos y Bibliografía</h2>
+
+            <h3>Videos Educativos</h3>
+            <ul>
+                <li><a href="https://www.youtube.com/watch?v=wYNvY_bOGdc" target="_blank">Áreas y Perímetros de Figuras Planas - Daniel Carreón</a></li>
+                <li><a href="https://www.youtube.com/watch?v=DXi6vD78hMI" target="_blank">Introducción a la Geometría Básica - Khan Academy Español</a></li>
+            </ul>
+
+            <h3>Libros Recomendados</h3>
+            <ul>
+                <li><em>Geometría Plana y del Espacio</em> - J.A. Baldor.</li>
+                <li><em>Geometría</em> - Clemens, O'Daffer y Cooney.</li>
+                <li><em>Matemáticas 2: Geometría y Trigonometría</em> - Eduardo Basurto.</li>
+            </ul>
+
+            <h3>Sitios Web de Consulta Confiables</h3>
+            <ul>
+                <li><a href="https://es.khanacademy.org/math/geometry" target="_blank">Khan Academy: Geometría</a></li>
+                <li><a href="https://www.geogebra.org/geometry" target="_blank">GeoGebra Geometría (Herramienta de dibujo)</a></li>
+            </ul>
+
+            <h3>Referencias Bibliográficas (APA)</h3>
+            <div style="font-size: 0.9rem; color: #555; background-color: #f9f9f9; padding: 10px; border-left: 3px solid #ccc;">
+                <p>Baldor, J. A. (2004). <em>Geometría plana y del espacio y trigonometría</em>. Publicaciones Cultural.</p>
+                <p>Alexander, D. C., & Koeberlein, G. M. (2013). <em>Geometría</em> (5ª ed.). Cengage Learning.</p>
+                <p>Khan Academy. (2023). <em>Área y perímetro</em>. Recuperado de https://es.khanacademy.org/</p>
             </div>
-        {% endif %}
-
-        <!-- Calculadora para el Cuadrado -->
-        <section>
-            <h3>Cuadrado</h3>
-            <img src="{% static 'images/cuadrado.png' %}" alt="Cuadrado" style="width:150px; height:auto;">
-            <p>Un cuadrado es una figura con cuatro lados iguales y cuatro ángulos rectos (90°).</p>
-            <ul>
-                <li><strong>Área:</strong> Se calcula multiplicando la longitud de un lado por sí misma. Fórmula: <strong>Lado × Lado</strong> o <strong>Lado²</strong></li>
-                <li><strong>Perímetro:</strong> Es la suma de las longitudes de sus cuatro lados. Fórmula: <strong>4 × Lado</strong></li>
-            </ul>
-            <form method="post">
-                {% csrf_token %}
-                <input type="hidden" name="figura" value="cuadrado">
-                <label for="lado">Lado:</label>
-                <input type="number" name="lado" step="any" required>
-                <button type="submit">Calcular</button>
-            </form>
-        </section>
-
-        <!-- Calculadora para el Rectángulo -->
-        <section>
-            <h3>Rectángulo</h3>
-            <img src="{% static 'images/rectangulo.png' %}" alt="Rectángulo" style="width:150px; height:auto;">
-            <p>Un rectángulo es una figura con cuatro lados, donde los lados opuestos son iguales, y tiene cuatro ángulos rectos.</p>
-            <ul>
-                <li><strong>Área:</strong> Se calcula multiplicando la longitud de su base por su altura. Fórmula: <strong>Base × Altura</strong></li>
-                <li><strong>Perímetro:</strong> Es la suma de las longitudes de sus cuatro lados. Fórmula: <strong>2 × (Base + Altura)</strong></li>
-            </ul>
-            <form method="post">
-                {% csrf_token %}
-                <input type="hidden" name="figura" value="rectangulo">
-                <label for="base">Base:</label>
-                <input type="number" name="base" step="any" required>
-                <label for="altura">Altura:</label>
-                <input type="number" name="altura" step="any" required>
-                <button type="submit">Calcular</button>
-            </form>
-        </section>
-
-        <!-- Calculadora para el Círculo -->
-        <section>
-            <h3>Círculo</h3>
-            <img src="{% static 'images/circulo.png' %}" alt="Círculo" style="width:150px; height:auto;">
-            <p>Un círculo es una figura delimitada por una circunferencia. La distancia desde el centro a cualquier punto de la circunferencia se llama radio.</p>
-            <ul>
-                <li><strong>Área:</strong> Se calcula multiplicando Pi (π ≈ 3.14159) por el radio al cuadrado. Fórmula: <strong>π × Radio²</strong></li>
-                <li><strong>Perímetro (Circunferencia):</strong> Es la longitud de la línea curva que forma el círculo. Fórmula: <strong>2 × π × Radio</strong></li>
-            </ul>
-            <form method="post">
-                {% csrf_token %}
-                <input type="hidden" name="figura" value="circulo">
-                <label for="radio">Radio:</label>
-                <input type="number" name="radio" step="any" required>
-                <button type="submit">Calcular</button>
-            </form>
-        </section>
-
-        <!-- Calculadora para el Triángulo -->
-        <section>
-            <h3>Triángulo Equilatero</h3>
-            <img src="{% static 'images/triangulo.png' %}" alt="Triángulo Equilátero" style="width:150px; height:auto;">
-            <p>Un triángulo equilátero es un polígono de tres lados donde todos sus lados tienen la misma longitud y, consecuentemente, sus tres ángulos internos son iguales, midiendo cada uno 60 grados</p>
-            <ul>
-               <li><strong>Área:</strong> Se calcula utilizando la medida del lado (L) con una fórmula específica para triángulos equiláteros. Fórmula: <strong>(√3 / 4) × L²</strong>.<br> También, se puede calcular de otra forma; multiplicando la base por la altura y dividiendo entre dos. Fórmula: <strong>(Base × Altura) / 2</strong></li>
-               <li><strong>Perímetro:</strong> Es la suma de las longitudes de sus tres lados. Al ser todos iguales, simplemente se triplica la medida. Fórmula: <strong>Lado × 3</strong></li>
-            </ul>
-            <p style="font-size: 0.9em; color: #555;">Para el área, se usara la fórmula (Base × Altura) / 2.</p>
-            <form method="post">
-                {% csrf_token %}
-                <input type="hidden" name="figura" value="triangulo">
-                <label for="base_t">Base:</label>
-                <input type="number" name="base_t" step="any" required>
-                <label for="altura_t">Altura:</label>
-                <input type="number" name="altura_t" step="any" required>
-                <button type="submit">Calcular</button>
-            </form>
         </section>
     </main>
 </body>

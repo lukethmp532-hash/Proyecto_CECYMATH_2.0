@@ -1,12 +1,13 @@
-<!-- ecuaciones_primer_grado/templates/ecuaciones_primer_grado/primer_grado.html -->
-
 {% load static %}
 <!DOCTYPE html>
 <html lang="es">
 <head>
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Ecuaciones de Primer Grado - CECYMATH 2.0</title>
     <link rel="stylesheet" href="{% static 'css/style.css' %}">
+    <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
 </head>
 <body>
     <header>
@@ -17,37 +18,119 @@
     </header>
 
     <main>
-        <section id="explicacion">
-            <h2>Ecuaciones de Primer Grado</h2>
-            <p>Una ecuación de primer grado es una igualdad que contiene una incógnita x, la cual no sabemos su valor. En la ecuación, la mayor potencia de la incógnita es 1.</p>
-            <h2>Resolver Ecuaciones de la Forma ax + b = c</h2>
-            <p>Una ecuación de primer grado es una igualdad que tiene una incógnita (x) con exponente 1. El objetivo es "despejar" la x para encontrar su valor.</p>
+        <section id="indice">
+            <h3>Índice de Contenidos</h3>
+            <ul>
+                <li><a href="#teoria">1. Fundamentos Teóricos</a></li>
+                <li><a href="#ejemplos">2. Ejemplos Resueltos Paso a Paso</a></li>
+                <li><a href="#calculadora">3. Calculadora de \(ax + b = c\)</a></li>
+                <li><a href="#recursos">4. Recursos Adicionales</a></li>
+            </ul>
         </section>
 
+        <!-- SECCIÓN TEÓRICA -->
+        <section id="teoria">
+            <h2>1. Fundamentos Teóricos</h2>
+            
+            <h3>Concepto y Definición</h3>
+            <p>Una <strong>Ecuación de Primer Grado</strong> (o lineal) es una igualdad matemática entre dos expresiones algebraicas que involucra una o más incógnitas elevadas a la primera potencia.</p>
+            <p><strong>Forma General:</strong> \(ax + b = c\)</p>
+            
+            <div style="text-align: center; margin: 20px 0;">
+                <img src="{% static 'images/primer_grado.png' %}" alt="Partes de una ecuación" style="max-width: 300px; height: auto; border-radius: 8px; border: 1px solid #ddd; padding: 5px;">
+            </div>
+
+            <h3>Reglas de Despeje</h3>
+            <article style="text-align: center;">
+            <p>Para resolver la ecuación, utilizamos la operación inversa:</p>
+            <ul class="regla_cambio">
+                <li>Lo que suma (+) &rarr; pasa restando (-)</li>
+                <li>Lo que resta (-) &rarr; pasa sumando (+)</li>
+                <li>Lo que multiplica (·) &rarr; pasa dividiendo (/)</li>
+                <li>Lo que divide (/) &rarr; pasa multiplicando (·)</li>
+            </ul>
+            </article>
+        </section>
+
+        <!-- SECCIÓN DE EJEMPLOS -->
+        <section id="ejemplos">
+            <h2>2. Ejemplos Resueltos Paso a Paso</h2>
+
+            <!-- Ejemplo 1 -->
+            <div class="ejemplo-box" style="background-color: #f0fdf4; padding: 15px; border-radius: 8px; border-left: 5px solid #2ecc71; margin-bottom: 20px;">
+                <h4 style="margin-top: 0; color: #0b6623;">Caso A: Término sumando</h4>
+                <p><strong>Resolver: \(2x + 4 = 10\)</strong></p>
+                <ol>
+                    <li>Pasamos el 4 restando: \(2x = 10 - 4 \Rightarrow 2x = 6\)</li>
+                    <li>Pasamos el 2 dividiendo: \(x = 6 / 2\)</li>
+                    <li><strong>Resultado: \(x = 3\)</strong></li>
+                </ol>
+            </div>
+
+            <!-- Ejemplo 2 -->
+            <div class="ejemplo-box" style="background-color: #fdf2f2; padding: 15px; border-radius: 8px; border-left: 5px solid #e74c3c;">
+                <h4 style="margin-top: 0; color: #c0392b;">Caso B: Término restando</h4>
+                <p><strong>Resolver: \(3x - 5 = 16\)</strong></p>
+                <ol>
+                    <li>Pasamos el 5 sumando: \(3x = 16 + 5 \Rightarrow 3x = 21\)</li>
+                    <li>Pasamos el 3 dividiendo: \(x = 21 / 3\)</li>
+                    <li><strong>Resultado: \(x = 7\)</strong></li>
+                </ol>
+            </div>
+        </section>
+
+        <!-- CALCULADORA CONECTADA A DJANGO -->
         <section id="calculadora">
-            <h3>Calculadora de Ecuaciones</h3>
-            <form action="{% url 'ecuaciones_primer_grado' %}" method="post">
+            <h2>3. Calculadora de \(ax + b = c\)</h2>
+            
+            <!-- SOLUCIÓN AL ERROR: Se agrega el csrf_token dentro del form -->
+            <form method="post">
                 {% csrf_token %}
-                <label for="a">Coeficiente 'a' (el número que multiplica a x):</label>
-                <input type="number" id="a" name="a" value="{{ v.a }}" step="any" required>
-                <label for="b">Término 'b':</label>
-                <input type="number" id="b" name="b" value="{{ v.b }}" step="any" required>
-                <label for="c">Término 'c' (el resultado):</label>
-                <input type="number" id="c" name="c" value="{{ v.c }}" step="any" required>
-                <button type="submit">Resolver para x</button>
+                
+                <label for="a">Coeficiente 'a' (acompaña a la \(x\)):</label>
+                <!-- Agregamos value="{{ v.a }}" para que no se borre el dato al calcular -->
+                <input type="number" id="a" name="a" step="any" required placeholder="Ej: 2" value="{{ v.a }}">
+                
+                <label for="b">Término 'b' (independiente):</label>
+                <input type="number" id="b" name="b" step="any" required placeholder="Ej: 4" value="{{ v.b }}">
+                
+                <label for="c">Término 'c' (resultado):</label>
+                <input type="number" id="c" name="c" step="any" required placeholder="Ej: 10" value="{{ v.c }}">
+                
+                <button type="submit">Calcular Valor de \(x\)</button>
             </form>
 
-            {% if resultado is not None %}
-                <div id="resultado">
-                    <p><strong>{{ resultado }}</strong></p>
+            <!-- MOSTRAR RESULTADOS DE DJANGO -->
+            {% if resultado %}
+                <div id="resultado" style="margin-top: 25px; padding: 15px; background-color: #e8f8f5; border: 2px solid #2ecc71; border-radius: 5px; text-align: center;">
+                    <p style="font-size: 1.2rem; color: #27ae60; font-weight: bold; margin: 0;">
+                        {{ resultado }}
+                    </p>
                 </div>
             {% endif %}
 
             {% if error %}
-                <div id="error">
-                    <p>{{ error }}</p>
+                <div id="error" style="margin-top: 25px; padding: 15px; background-color: #fce4ec; border: 2px solid #c2185b; border-radius: 5px; text-align: center;">
+                    <p style="color: #c2185b; font-weight: bold; margin: 0;">
+                        {{ error }}
+                    </p>
                 </div>
             {% endif %}
+        </section>
+
+        <section id="recursos">
+            <h3>4. Recursos Adicionales</h3>
+            
+            <strong>Vídeos Educativos:</strong>
+            <ul>
+                <li><a href="https://www.youtube.com/watch?v=4h2-gpGz6bI" target="_blank">Ecuaciones de primer grado Super Fácil - Daniel Carreón</a></li>
+            </ul>
+
+            <strong>Bibliografía:</strong>
+            <div style="background-color: #f9f9f9; padding: 10px; border-left: 3px solid #ccc; margin-top: 10px;">
+                <p>Baldor, A. (2017). <em>Álgebra</em>. Grupo Editorial Patria.</p>
+                <p>Aguilar Márquez, A. (2009). <em>Matemáticas Simplificadas</em>. CONAMAT.</p>
+            </div>
         </section>
     </main>
 </body>
